@@ -11,12 +11,10 @@
   <Choose>
     <When Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
       <ItemGroup>
-        <Compile Remove="Properties\Resources.Designer.cs" />
-        <EmbeddedResource Remove="Properties\Resources.resx" />
-        <Compile Update="Properties\Resources.Standard.Designer.cs">
+        <Compile Update="Properties\Resources.Designer.cs">
+          <DependentUpon>Resources.resx</DependentUpon>
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
-          <DependentUpon>Resources.Standard.resx</DependentUpon>
         </Compile>
         <EmbeddedResource Update="Properties\Resources.Standard.resx">
           <Generator>PublicResXFileCodeGenerator</Generator>
