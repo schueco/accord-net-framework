@@ -5,11 +5,11 @@
   <PropertyGroup>
     <RootNamespace>Accord.Tests.Imaging</RootNamespace>
     <AssemblyName>Accord.Tests.Imaging</AssemblyName>
-    <TargetFrameworks>netcoreapp2.0;net47</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net47</TargetFrameworks>
   </PropertyGroup>
 
   <Choose>
-    <When Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <When Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
       <ItemGroup>
         <Compile Update="Properties\Resources.Designer.cs">
           <DependentUpon>Resources.resx</DependentUpon>
@@ -39,6 +39,15 @@
     <ProjectReference Include="..\..\Sources\Accord.MachineLearning\Accord.MachineLearning (NETStandard).csproj" />
     <ProjectReference Include="..\..\Sources\Accord.Math.Core\Accord.Math.Core (NETStandard).csproj" />
     <ProjectReference Include="..\..\Sources\Accord.Math\Accord.Math (NETStandard).csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Standard.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.Standard.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

@@ -7039,7 +7039,7 @@ namespace Accord.Math
         ///
         /// <seealso cref="Interval(int, int)"/>
         ///
-        public static float[] Range(this Range range)
+        public static float[] Range(this Accord.Range range)
         {
             return Range(range.Min, range.Max);
         }
@@ -7065,7 +7065,7 @@ namespace Accord.Math
         ///
         /// <seealso cref="Interval(int, int)"/>
         ///
-        public static double[] Range(this Range range, double stepSize)
+        public static double[] Range(this Accord.Range range, double stepSize)
         {
             return Range(range.Min, range.Max, stepSize);
         }
@@ -7090,7 +7090,7 @@ namespace Accord.Math
         ///
         /// <seealso cref="Interval(int, int)"/>
         ///
-        public static float[] Range(this Range range, float stepSize)
+        public static float[] Range(this Accord.Range range, float stepSize)
         {
             return Range(range.Min, range.Max, stepSize);
         }
@@ -7115,7 +7115,7 @@ namespace Accord.Math
         ///
         /// <seealso cref="Interval(int, int)"/>
         ///
-        public static float[] Range(this Range range, byte stepSize)
+        public static float[] Range(this Accord.Range range, byte stepSize)
         {
             return Range(range.Min, range.Max, stepSize);
         }
@@ -7140,7 +7140,7 @@ namespace Accord.Math
         ///
         /// <seealso cref="Interval(int, int)"/>
         ///
-        public static float[] Range(this Range range, int stepSize)
+        public static float[] Range(this Accord.Range range, int stepSize)
         {
             return Range(range.Min, range.Max, stepSize);
         }

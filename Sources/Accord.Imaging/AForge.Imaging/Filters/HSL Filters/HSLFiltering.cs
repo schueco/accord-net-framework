@@ -64,8 +64,8 @@ namespace Accord.Imaging.Filters
     public class HSLFiltering : BaseInPlacePartialFilter
     {
         private IntRange hue = new IntRange(0, 359);
-        private Range saturation = new Range(0.0f, 1.0f);
-        private Range luminance = new Range(0.0f, 1.0f);
+        private Accord.Range saturation = new Accord.Range(0.0f, 1.0f);
+        private Accord.Range luminance = new Accord.Range(0.0f, 1.0f);
 
         private int fillH = 0;
         private float fillS = 0.0f;
@@ -105,7 +105,7 @@ namespace Accord.Imaging.Filters
         /// <summary>
         /// Range of saturation component, [0, 1].
         /// </summary>
-        public Range Saturation
+        public Accord.Range Saturation
         {
             get { return saturation; }
             set { saturation = value; }
@@ -114,7 +114,7 @@ namespace Accord.Imaging.Filters
         /// <summary>
         /// Range of luminance component, [0, 1].
         /// </summary>
-        public Range Luminance
+        public Accord.Range Luminance
         {
             get { return luminance; }
             set { luminance = value; }
@@ -214,7 +214,7 @@ namespace Accord.Imaging.Filters
         /// <param name="saturation">Range of saturation component.</param>
         /// <param name="luminance">Range of luminance component.</param>
         /// 
-        public HSLFiltering(IntRange hue, Range saturation, Range luminance) :
+        public HSLFiltering(IntRange hue, Accord.Range saturation, Accord.Range luminance) :
             this()
         {
             this.hue = hue;

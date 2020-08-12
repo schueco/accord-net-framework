@@ -396,11 +396,11 @@ namespace Accord.Imaging
             }
 
             // create histograms
-            saturation = new ContinuousHistogram(s, new Range(0, 1));
-            luminance = new ContinuousHistogram(l, new Range(0, 1));
+            saturation = new ContinuousHistogram(s, new Accord.Range(0, 1));
+            luminance = new ContinuousHistogram(l, new Accord.Range(0, 1));
 
-            saturationWithoutBlack = new ContinuousHistogram(swb, new Range(0, 1));
-            luminanceWithoutBlack = new ContinuousHistogram(lwb, new Range(0, 1));
+            saturationWithoutBlack = new ContinuousHistogram(swb, new Accord.Range(0, 1));
+            luminanceWithoutBlack = new ContinuousHistogram(lwb, new Accord.Range(0, 1));
         }
 
         // Check pixel format of the source image

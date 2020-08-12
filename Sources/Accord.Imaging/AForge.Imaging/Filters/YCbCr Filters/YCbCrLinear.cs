@@ -46,13 +46,13 @@ namespace Accord.Imaging.Filters
     /// 
     public class YCbCrLinear : BaseInPlacePartialFilter
     {
-        private Range inY = new Range(0.0f, 1.0f);
-        private Range inCb = new Range(-0.5f, 0.5f);
-        private Range inCr = new Range(-0.5f, 0.5f);
+        private Accord.Range inY = new Accord.Range(0.0f, 1.0f);
+        private Accord.Range inCb = new Accord.Range(-0.5f, 0.5f);
+        private Accord.Range inCr = new Accord.Range(-0.5f, 0.5f);
 
-        private Range outY = new Range(0.0f, 1.0f);
-        private Range outCb = new Range(-0.5f, 0.5f);
-        private Range outCr = new Range(-0.5f, 0.5f);
+        private Accord.Range outY = new Accord.Range(0.0f, 1.0f);
+        private Accord.Range outCb = new Accord.Range(-0.5f, 0.5f);
+        private Accord.Range outCr = new Accord.Range(-0.5f, 0.5f);
 
         // format translation dictionary
         private Dictionary<PixelFormat, PixelFormat> formatTranslations = new Dictionary<PixelFormat, PixelFormat>();
@@ -64,7 +64,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Y component is measured in the range of [0, 1].</remarks>
         ///
-        public Range InY
+        public Accord.Range InY
         {
             get { return inY; }
             set { inY = value; }
@@ -76,7 +76,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Cb component is measured in the range of [-0.5, 0.5].</remarks>
         ///
-        public Range InCb
+        public Accord.Range InCb
         {
             get { return inCb; }
             set { inCb = value; }
@@ -88,7 +88,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Cr component is measured in the range of [-0.5, 0.5].</remarks>
         ///
-        public Range InCr
+        public Accord.Range InCr
         {
             get { return inCr; }
             set { inCr = value; }
@@ -100,7 +100,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Y component is measured in the range of [0, 1].</remarks>
         ///
-        public Range OutY
+        public Accord.Range OutY
         {
             get { return outY; }
             set { outY = value; }
@@ -112,7 +112,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Cb component is measured in the range of [-0.5, 0.5].</remarks>
         ///
-        public Range OutCb
+        public Accord.Range OutCb
         {
             get { return outCb; }
             set { outCb = value; }
@@ -124,7 +124,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Cr component is measured in the range of [-0.5, 0.5].</remarks>
         ///
-        public Range OutCr
+        public Accord.Range OutCr
         {
             get { return outCr; }
             set { outCr = value; }

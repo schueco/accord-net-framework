@@ -45,7 +45,7 @@ namespace Accord.Imaging.Filters
     public class AdditiveNoise : BaseInPlacePartialFilter
     {
         // random number generator to add noise
-        IRandomNumberGenerator<double> generator = new UniformContinuousDistribution(new Range(-10, 10));
+        IRandomNumberGenerator<double> generator = new UniformContinuousDistribution(new Accord.Range(-10, 10));
 
         // private format translation dictionary
         private Dictionary<PixelFormat, PixelFormat> formatTranslations = new Dictionary<PixelFormat, PixelFormat>();

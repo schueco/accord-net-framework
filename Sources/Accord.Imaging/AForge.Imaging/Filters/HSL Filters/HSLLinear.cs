@@ -46,10 +46,10 @@ namespace Accord.Imaging.Filters
     /// 
     public class HSLLinear : BaseInPlacePartialFilter
     {
-        private Range inLuminance = new Range(0.0f, 1.0f);
-        private Range inSaturation = new Range(0.0f, 1.0f);
-        private Range outLuminance = new Range(0.0f, 1.0f);
-        private Range outSaturation = new Range(0.0f, 1.0f);
+        private Accord.Range inLuminance = new Accord.Range(0.0f, 1.0f);
+        private Accord.Range inSaturation = new Accord.Range(0.0f, 1.0f);
+        private Accord.Range outLuminance = new Accord.Range(0.0f, 1.0f);
+        private Accord.Range outSaturation = new Accord.Range(0.0f, 1.0f);
 
         // format translation dictionary
         private Dictionary<PixelFormat, PixelFormat> formatTranslations = new Dictionary<PixelFormat, PixelFormat>();
@@ -61,7 +61,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Luminance component is measured in the range of [0, 1].</remarks>
         /// 
-        public Range InLuminance
+        public Accord.Range InLuminance
         {
             get { return inLuminance; }
             set { inLuminance = value; }
@@ -73,7 +73,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Luminance component is measured in the range of [0, 1].</remarks>
         /// 
-        public Range OutLuminance
+        public Accord.Range OutLuminance
         {
             get { return outLuminance; }
             set { outLuminance = value; }
@@ -85,7 +85,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Saturation component is measured in the range of [0, 1].</remarks>
         /// 
-        public Range InSaturation
+        public Accord.Range InSaturation
         {
             get { return inSaturation; }
             set { inSaturation = value; }
@@ -97,7 +97,7 @@ namespace Accord.Imaging.Filters
         /// 
         /// <remarks>Saturation component is measured in the range of [0, 1].</remarks>
         /// 
-        public Range OutSaturation
+        public Accord.Range OutSaturation
         {
             get { return outSaturation; }
             set { outSaturation = value; }

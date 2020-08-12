@@ -48,8 +48,8 @@
     <DefineConstants>NO_EXPRESSIONS;NO_BINARY_SERIALIZATION;NO_DATA_TABLE;NO_DEFAULT_ENCODING;NO_CULTURE;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
-    <DefineConstants>$(DefineConstants)</DefineConstants>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+    <DefineConstants>NO_EXCEL;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net35'">

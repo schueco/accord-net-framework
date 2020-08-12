@@ -80,7 +80,7 @@ namespace Accord.Genetic
         }
 
         // optimization range
-        private Range range = new Range(0, 1);
+        private Accord.Range range = new Accord.Range(0, 1);
 
         // optimization mode
         private Modes mode = Modes.Maximization;
@@ -93,7 +93,7 @@ namespace Accord.Genetic
         /// be searched in this range only.
         /// </remarks>
         /// 
-        public Range Range
+        public Accord.Range Range
         {
             get { return range; }
             set { range = value; }
@@ -117,7 +117,7 @@ namespace Accord.Genetic
         ///
         /// <param name="range">Specifies range for optimization.</param>
         ///
-        public OptimizationFunction1D(Range range)
+        public OptimizationFunction1D(Accord.Range range)
         {
             this.range = range;
         }

@@ -183,9 +183,9 @@ namespace Accord.Neuro.Learning
 
             // population parameters
             this.populationSize = populationSize;
-            this.chromosomeGenerator = new UniformContinuousDistribution(new Range(-1, 1));
+            this.chromosomeGenerator = new UniformContinuousDistribution(new Accord.Range(-1, 1));
             this.mutationMultiplierGenerator = new ExponentialDistribution(1);
-            this.mutationAdditionGenerator = new UniformContinuousDistribution(new Range(-0.5f, 0.5f));
+            this.mutationAdditionGenerator = new UniformContinuousDistribution(new Accord.Range(-0.5f, 0.5f));
             this.selectionMethod = new EliteSelection();
             this.crossOverRate = 0.75;
             this.mutationRate = 0.25;

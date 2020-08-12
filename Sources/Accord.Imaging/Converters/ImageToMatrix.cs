@@ -512,7 +512,7 @@ namespace Accord.Imaging.Converters
                     for (int y = 0; y < height; y++)
                     {
                         for (int x = 0; x < width; x++, src += pixelSize, dst++)
-                            *dst = Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
+                            *dst = Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
                         src += offset;
                     }
                 }
@@ -542,7 +542,7 @@ namespace Accord.Imaging.Converters
                 for (int y = 0; y < height; y++)
                 {
                     for (int x = 0; x < width; x++, src += pixelSize)
-                        output[y][x] = Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
+                        output[y][x] = Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
                     src += offset;
                 }
             }
@@ -577,7 +577,7 @@ namespace Accord.Imaging.Converters
                     for (int y = 0; y < height; y++)
                     {
                         for (int x = 0; x < width; x++, src += pixelSize, dst++)
-                            *dst = Vector.Scale(*src, (byte)0, (byte)255, min, max);
+                            *dst = Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, min, max);
                         src += offset;
                     }
                 }
@@ -610,7 +610,7 @@ namespace Accord.Imaging.Converters
                 for (int y = 0; y < height; y++)
                 {
                     for (int x = 0; x < width; x++, src += pixelSize)
-                        output[y][x] = Vector.Scale(*src, (byte)0, (byte)255, min, max);
+                        output[y][x] = Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, min, max);
                     src += offset;
                 }
             }
@@ -829,7 +829,7 @@ namespace Accord.Imaging.Converters
                 for (int y = 0; y < height; y++)
                 {
                     for (int x = 0; x < width; x++, src += pixelSize)
-                        output[y, x] = Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
+                        output[y, x] = Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
                     src += offset;
                 }
             }
@@ -860,7 +860,7 @@ namespace Accord.Imaging.Converters
                 for (int y = 0; y < height; y++)
                 {
                     for (int x = 0; x < width; x++, src += pixelSize)
-                        output[y][x] = Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
+                        output[y][x] = Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
                     src += offset;
                 }
             }
@@ -896,7 +896,7 @@ namespace Accord.Imaging.Converters
                     for (int x = 0; x < width; x++)
                     {
                         for (int d = 0; d < pixelSize; d++, src++)
-                            output[y][x][d] = Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
+                            output[y][x][d] = Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
                     }
                     src += offset;
                 }
@@ -933,7 +933,7 @@ namespace Accord.Imaging.Converters
                     for (int x = 0; x < width; x++)
                     {
                         for (int d = 0; d < pixelSize; d++, src++)
-                            output[y, x, d] = (float)Vector.Scale(*src, (float)0, (float)255, Min, Max);
+                            output[y, x, d] = (float)Accord.Math.Vector.Scale(*src, (float)0, (float)255, Min, Max);
                     }
                     src += offset;
                 }
@@ -970,7 +970,7 @@ namespace Accord.Imaging.Converters
                     for (int x = 0; x < width; x++)
                     {
                         for (int d = 0; d < pixelSize; d++, src++)
-                            output[y][x][d] = (float)Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
+                            output[y][x][d] = (float)Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
                     }
                     src += offset;
                 }
@@ -1007,7 +1007,7 @@ namespace Accord.Imaging.Converters
                     for (int x = 0; x < width; x++)
                     {
                         for (int d = 0; d < pixelSize; d++, src++)
-                            output[y, x, d] = (byte)Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
+                            output[y, x, d] = (byte)Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
                     }
                     src += offset;
                 }
@@ -1044,7 +1044,7 @@ namespace Accord.Imaging.Converters
                     for (int x = 0; x < width; x++)
                     {
                         for (int d = 0; d < pixelSize; d++, src++)
-                            output[y][x][d] = (byte)Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
+                            output[y][x][d] = (byte)Accord.Math.Vector.Scale(*src, (byte)0, (byte)255, Min, Max);
                     }
                     src += offset;
                 }
@@ -1081,7 +1081,7 @@ namespace Accord.Imaging.Converters
                     for (int x = 0; x < width; x++)
                     {
                         for (int d = 0; d < pixelSize; d++, src++)
-                            output[y, x, d] = Vector.Scale(*src, (double)0, (double)255, Min, Max);
+                            output[y, x, d] = Accord.Math.Vector.Scale(*src, (double)0, (double)255, Min, Max);
                     }
                     src += offset;
                 }
