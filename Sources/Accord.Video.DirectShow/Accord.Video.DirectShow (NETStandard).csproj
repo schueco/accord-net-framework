@@ -1,30 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <AssemblyName>Accord.Video.DirectShow</AssemblyName>
     <RootNamespace>Accord.Video.DirectShow</RootNamespace>
-    <TargetFrameworks>netstandard2.1;net47</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net47</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
+    <NoWarn>1701;1702;CS0618</NoWarn>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
 
   <Choose>
-    <When Condition="'$(TargetFramework)' == 'netstandard2.1'">
-      <ItemGroup>
-        <Compile Remove="VideoCaptureDeviceForm.cs" />
-        <Compile Remove="VideoCaptureDeviceForm.Designer.cs" />
-        <EmbeddedResource Remove="VideoCaptureDeviceForm.resx" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
+    <When Condition="'$(TargetFramework)' != 'netcoreapp3.1'">
       <ItemGroup>
         <Reference Include="System.Windows.Forms" />
       </ItemGroup>
-    </Otherwise>
+    </When>
   </Choose>
 
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="4.5.0-preview1-25914-04" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>

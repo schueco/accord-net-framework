@@ -4,6 +4,7 @@
     <AssemblyName>Accord.Video.Kinect</AssemblyName>
     <RootNamespace>Accord.Video.Kinect</RootNamespace>
     <TargetFrameworks>netstandard2.1;net47</TargetFrameworks>
+    <NoWarn>CS0618</NoWarn>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
