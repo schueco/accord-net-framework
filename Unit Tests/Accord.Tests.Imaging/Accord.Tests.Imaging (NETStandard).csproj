@@ -5,18 +5,16 @@
   <PropertyGroup>
     <RootNamespace>Accord.Tests.Imaging</RootNamespace>
     <AssemblyName>Accord.Tests.Imaging</AssemblyName>
-    <TargetFrameworks>netcoreapp2.0;net47</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net47</TargetFrameworks>
   </PropertyGroup>
 
   <Choose>
-    <When Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <When Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
       <ItemGroup>
-        <Compile Remove="Properties\Resources.Designer.cs" />
-        <EmbeddedResource Remove="Properties\Resources.resx" />
-        <Compile Update="Properties\Resources.Standard.Designer.cs">
+        <Compile Update="Properties\Resources.Designer.cs">
+          <DependentUpon>Resources.resx</DependentUpon>
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
-          <DependentUpon>Resources.Standard.resx</DependentUpon>
         </Compile>
         <EmbeddedResource Update="Properties\Resources.Standard.resx">
           <Generator>PublicResXFileCodeGenerator</Generator>
@@ -32,7 +30,8 @@
   </Choose>
 
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="4.5.0-preview1-25914-04" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="4.7.1" />
   </ItemGroup>
 
 
@@ -41,6 +40,15 @@
     <ProjectReference Include="..\..\Sources\Accord.MachineLearning\Accord.MachineLearning (NETStandard).csproj" />
     <ProjectReference Include="..\..\Sources\Accord.Math.Core\Accord.Math.Core (NETStandard).csproj" />
     <ProjectReference Include="..\..\Sources\Accord.Math\Accord.Math (NETStandard).csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Standard.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.Standard.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -77,9 +85,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Update="NUnit" Version="3.8.1" />
-    <PackageReference Update="NUnit.Console" Version="3.7.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.7.0" />
+    <PackageReference Update="NUnit" Version="3.12.0" />
+    <PackageReference Update="NUnit.Console" Version="3.11.1" />
+    <PackageReference Update="NUnit3TestAdapter" Version="3.17.0" />
   </ItemGroup>
 
 </Project>

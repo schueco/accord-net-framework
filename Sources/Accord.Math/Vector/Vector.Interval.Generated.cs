@@ -1149,7 +1149,7 @@ namespace Accord.Math
         ///
         /// <seealso cref="Vector.Range(int, int)"/>
         ///
-        public static float[] Interval(this Range range, int steps)
+        public static float[] Interval(this Accord.Range range, int steps)
         {
             return Interval(range.Min, range.Max, steps);
         }
@@ -1158,7 +1158,7 @@ namespace Accord.Math
         ///   Obsolete. Please use Vector.Range(range, stepSize) instead.
         /// </summary>
 		[Obsolete("Please use Vector.Range(range, stepSize) instead.")]
-        public static float[] Interval(this Range range, double stepSize)
+        public static float[] Interval(this Accord.Range range, double stepSize)
         {
             return Interval(range.Min, range.Max, stepSize);
         }

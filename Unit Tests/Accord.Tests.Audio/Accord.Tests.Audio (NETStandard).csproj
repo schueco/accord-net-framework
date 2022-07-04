@@ -3,15 +3,15 @@
   <PropertyGroup>
     <RootNamespace>Accord.Tests.Audio</RootNamespace>
     <AssemblyName>Accord.Tests.Audio</AssemblyName>
-    <TargetFrameworks>netcoreapp2.0;netcoreapp1.1;net47</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net47</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)../Unit Tests/Accord.Tests (NETStandard).targets" />
 
   <Choose>
-    <When Condition="'$(TargetFramework)' == 'netcoreapp2.0' OR '$(TargetFramework)' == 'netcoreapp1.1'">
+    <When Condition="'$(TargetFramework)' == 'netcoreapp3.1' OR '$(TargetFramework)' == 'netcoreapp1.1'">
       <ItemGroup>
-        <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
       </ItemGroup>
     </When>
     <Otherwise>
@@ -22,8 +22,8 @@
   </Choose>
   
   <ItemGroup>
-    <PackageReference Include="SharpDX" Version="4.0.1" />
-    <PackageReference Include="SharpDX.DirectSound" Version="4.0.1" />
+    <PackageReference Include="SharpDX" Version="4.2.0" />
+    <PackageReference Include="SharpDX.DirectSound" Version="4.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,9 +58,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Update="NUnit" Version="3.8.1" />
-    <PackageReference Update="NUnit.Console" Version="3.7.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.7.0" />
+    <PackageReference Update="NUnit" Version="3.12.0" />
+    <PackageReference Update="NUnit.Console" Version="3.11.1" />
+    <PackageReference Update="NUnit3TestAdapter" Version="3.17.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net47'">
+    <PackageReference Include="System.Resources.Extensions">
+      <Version>4.7.1</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="System.Resources.Extensions">
+      <Version>4.7.1</Version>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

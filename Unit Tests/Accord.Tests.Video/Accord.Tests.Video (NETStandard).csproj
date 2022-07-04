@@ -3,13 +3,13 @@
   <PropertyGroup>
     <RootNamespace>Accord.Tests.Video</RootNamespace>
     <AssemblyName>Accord.Tests.Video</AssemblyName>
-    <TargetFrameworks>netcoreapp2.0;net47</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net47</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)../Unit Tests/Accord.Tests (NETStandard).targets" />
 
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="4.5.0-preview1-25914-04" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,9 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Update="NUnit" Version="3.8.1" />
-    <PackageReference Update="NUnit.Console" Version="3.7.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.7.0" />
+    <PackageReference Update="NUnit" Version="3.12.0" />
+    <PackageReference Update="NUnit.Console" Version="3.11.1" />
+    <PackageReference Update="NUnit3TestAdapter" Version="3.17.0" />
   </ItemGroup>
 
 </Project>

@@ -20,20 +20,21 @@
 //    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using Accord.Math;
+using Accord.Math.Decompositions;
+using AForge;
+using NUnit.Framework;
+using Accord.IO;
+
 namespace Accord.Tests.Math
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using Accord.Math;
-    using Accord.Math.Decompositions;
-    using AForge;
-    using NUnit.Framework;
-    using Accord.IO;
 
     [TestFixture]
-    [SetCulture("")]
+    //[SetCulture("")]
     public partial class MatrixTest
     {
 
@@ -987,7 +988,7 @@ namespace Accord.Tests.Math
 
             double[] abs = u.Abs();   // { 1, 6, 3 }
             double[] log = u.Log();   // { 0, 1.79, 1.09 }
-            double[] cos = u.Apply(Math.Cos); // { 0.54, 0.96, -0.989 }
+            double[] cos = u.Apply(System.Math.Cos); // { 0.54, 0.96, -0.989 }
 
             Assert.IsTrue(abs.IsEqual(new double[] { 1, 6, 3 }));
             Assert.IsTrue(log.IsEqual(new double[] { 0, 1.79, 1.09 }, 1e-2));
@@ -1916,7 +1917,7 @@ namespace Accord.Tests.Math
             Assert.AreEqual(expected, det);
 
             det = Matrix.LogDeterminant(m);
-            Assert.AreEqual(Math.Log(expected), det, 1e-10);
+            Assert.AreEqual(System.Math.Log(expected), det, 1e-10);
             Assert.IsFalse(Double.IsNaN(det));
 
             det = Matrix.PseudoDeterminant(m);

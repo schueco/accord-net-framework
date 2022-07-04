@@ -54,6 +54,10 @@
     <DefineConstants>$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.1'">
+    <DefineConstants>NO_EXCEL;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+  
   <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
     <DefineConstants>NO_PARALLEL;$(DefineConstants)</DefineConstants>
   </PropertyGroup>

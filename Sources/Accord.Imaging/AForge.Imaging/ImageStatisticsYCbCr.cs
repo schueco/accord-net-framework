@@ -432,13 +432,13 @@ namespace Accord.Imaging
             }
 
             // create histograms
-            yHistogram = new ContinuousHistogram(yhisto, new Range(0.0f, 1.0f));
-            cbHistogram = new ContinuousHistogram(cbhisto, new Range(-0.5f, 0.5f));
-            crHistogram = new ContinuousHistogram(crhisto, new Range(-0.5f, 0.5f));
+            yHistogram = new ContinuousHistogram(yhisto, new Accord.Range(0.0f, 1.0f));
+            cbHistogram = new ContinuousHistogram(cbhisto, new Accord.Range(-0.5f, 0.5f));
+            crHistogram = new ContinuousHistogram(crhisto, new Accord.Range(-0.5f, 0.5f));
 
-            yHistogramWithoutBlack = new ContinuousHistogram(yhistoWB, new Range(0.0f, 1.0f));
-            cbHistogramWithoutBlack = new ContinuousHistogram(cbhistoWB, new Range(-0.5f, 0.5f));
-            crHistogramWithoutBlack = new ContinuousHistogram(crhistoWB, new Range(-0.5f, 0.5f));
+            yHistogramWithoutBlack = new ContinuousHistogram(yhistoWB, new Accord.Range(0.0f, 1.0f));
+            cbHistogramWithoutBlack = new ContinuousHistogram(cbhistoWB, new Accord.Range(-0.5f, 0.5f));
+            crHistogramWithoutBlack = new ContinuousHistogram(crhistoWB, new Accord.Range(-0.5f, 0.5f));
         }
 
         // Check pixel format of the source image

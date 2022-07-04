@@ -47,9 +47,9 @@ namespace Accord.Imaging.Filters
     /// 
     public class YCbCrFiltering : BaseInPlacePartialFilter
     {
-        private Range yRange = new Range(0.0f, 1.0f);
-        private Range cbRange = new Range(-0.5f, 0.5f);
-        private Range crRange = new Range(-0.5f, 0.5f);
+        private Accord.Range yRange = new Accord.Range(0.0f, 1.0f);
+        private Accord.Range cbRange = new Accord.Range(-0.5f, 0.5f);
+        private Accord.Range crRange = new Accord.Range(-0.5f, 0.5f);
 
         private float fillY = 0.0f;
         private float fillCb = 0.0f;
@@ -77,7 +77,7 @@ namespace Accord.Imaging.Filters
         /// Range of Y component, [0, 1].
         /// </summary>
         /// 
-        public Range Y
+        public Accord.Range Y
         {
             get { return yRange; }
             set { yRange = value; }
@@ -87,7 +87,7 @@ namespace Accord.Imaging.Filters
         /// Range of Cb component, [-0.5, 0.5].
         /// </summary>
         /// 
-        public Range Cb
+        public Accord.Range Cb
         {
             get { return cbRange; }
             set { cbRange = value; }
@@ -97,7 +97,7 @@ namespace Accord.Imaging.Filters
         /// Range of Cr component, [-0.5, 0.5].
         /// </summary>
         /// 
-        public Range Cr
+        public Accord.Range Cr
         {
             get { return crRange; }
             set { crRange = value; }
@@ -197,7 +197,7 @@ namespace Accord.Imaging.Filters
         /// <param name="cbRange">Range of Cb component.</param>
         /// <param name="crRange">Range of Cr component.</param>
         /// 
-        public YCbCrFiltering(Range yRange, Range cbRange, Range crRange) :
+        public YCbCrFiltering(Accord.Range yRange, Accord.Range cbRange, Accord.Range crRange) :
             this()
         {
             this.yRange = yRange;

@@ -3,15 +3,15 @@
   <PropertyGroup>
     <AssemblyName>Accord</AssemblyName>
     <RootNamespace>Accord</RootNamespace>
-    <TargetFrameworks>netstandard2.0;netstandard1.4;net47</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net47</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
 
   <Choose>
-    <When Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard1.4'">
+    <When Condition="'$(TargetFramework)' == 'netstandard2.1' OR '$(TargetFramework)' == 'netstandard1.4'">
       <ItemGroup>
-        <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
       </ItemGroup>
     </When>
     <Otherwise>

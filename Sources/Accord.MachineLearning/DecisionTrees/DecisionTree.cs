@@ -496,7 +496,7 @@ namespace Accord.MachineLearning.DecisionTrees
             return new DecisionTreeExpressionCreator(this).Create();
         }
 
-#if !NETSTANDARD2_0
+#if !(NETSTANDARD2_0 || NETSTANDARD2_1)
         /// <summary>
         ///   Creates a .NET assembly (.dll) containing a static class of
         ///   the given name implementing the decision tree. The class will

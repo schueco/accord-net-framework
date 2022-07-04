@@ -84,6 +84,7 @@ namespace Accord.Statistics.Filters
             return options;
         }
 
+#if !NETSTANDARD2_1
         /// <summary>
         ///   Gets the associated options for the given column name.
         /// </summary>
@@ -97,5 +98,6 @@ namespace Accord.Statistics.Filters
         {
             return base.Dictionary.TryGetValue(columnName, out options);
         }
+#endif
     }
 }

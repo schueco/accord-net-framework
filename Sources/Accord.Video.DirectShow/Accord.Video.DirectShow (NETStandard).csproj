@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyName>Accord.Video.DirectShow</AssemblyName>
     <RootNamespace>Accord.Video.DirectShow</RootNamespace>
-    <TargetFrameworks>netstandard2.0;net47</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net47</TargetFrameworks>
+    <NoWarn>1701;1702;CS0618</NoWarn>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
 
   <Choose>
-    <When Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <When Condition="'$(TargetFramework)' == 'netstandard2.1'">
       <ItemGroup>
         <Compile Remove="VideoCaptureDeviceForm.cs" />
         <Compile Remove="VideoCaptureDeviceForm.Designer.cs" />
@@ -24,7 +24,7 @@
   </Choose>
 
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="4.5.0-preview1-25914-04" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Accord.IO</AssemblyName>
     <RootNamespace>Accord.IO</RootNamespace>
-    <TargetFrameworks>netstandard2.0;netstandard1.4;net47</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net47</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <Choose>
-    <When Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard1.4'">
+    <When Condition="'$(TargetFramework)' == 'netstandard2.1' OR '$(TargetFramework)' == 'netstandard1.4'">
       <ItemGroup>
-        <PackageReference Include="SharpZipLib.NETStandard" Version="0.86.0.1" />
+        <PackageReference Include="SharpZipLib.NETStandard" Version="1.0.7" />
       </ItemGroup>
     </When>
     <Otherwise>
@@ -25,6 +25,10 @@
       </ItemGroup>
     </Otherwise>
   </Choose>
+
+  <ItemGroup>
+    <PackageReference Include="SharpZipLib" Version="1.2.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Accord.Core\Accord.Core (NETStandard).csproj" />

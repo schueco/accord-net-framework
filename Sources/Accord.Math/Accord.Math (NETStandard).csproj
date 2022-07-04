@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Accord.Math</AssemblyName>
     <RootNamespace>Accord.Math</RootNamespace>
-    <TargetFrameworks>netstandard2.0;netstandard1.4;net47</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net47</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
@@ -20,7 +20,7 @@
         <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
       </ItemGroup>
     </When>
-    <When Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <When Condition="'$(TargetFramework)' == 'netstandard2.1'">
       <ItemGroup>
         <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
         <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />

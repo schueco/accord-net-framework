@@ -5,7 +5,7 @@
   <PropertyGroup>
     <RootNamespace>Accord.Tests.Statistics</RootNamespace>
     <AssemblyName>Accord.Tests.Statistics</AssemblyName>
-    <TargetFrameworks>netcoreapp2.0;net47</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net47</TargetFrameworks>
     <!--
     <StartupObject>Accord.Tests.Statistics.Program</StartupObject>
     <OutputType>Exe</OutputType>
@@ -13,9 +13,9 @@
   </PropertyGroup>
 
   <Choose>
-    <When Condition="'$(TargetFramework)' == 'netcoreapp2.0' OR '$(TargetFramework)' == 'netcoreapp1.1'">
+    <When Condition="'$(TargetFramework)' == 'netcoreapp3.1' OR '$(TargetFramework)' == 'netcoreapp1.1'">
       <ItemGroup>
-        <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
       </ItemGroup>
     </When>
     <Otherwise>
@@ -91,9 +91,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Update="NUnit" Version="3.8.1" />
-    <PackageReference Update="NUnit.Console" Version="3.7.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.7.0" />
+    <PackageReference Update="NUnit" Version="3.12.0" />
+    <PackageReference Update="NUnit.Console" Version="3.11.1" />
+    <PackageReference Update="NUnit3TestAdapter" Version="3.17.0" />
   </ItemGroup>
 
 </Project>

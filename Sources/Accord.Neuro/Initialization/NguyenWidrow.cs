@@ -42,7 +42,7 @@ namespace Accord.Neuro
     public class NguyenWidrow
     {
         private ActivationNetwork network;
-        private Range randRange;
+        private Accord.Range randRange;
         private double beta;
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Accord.Neuro
             int hiddenNodes = network.Layers[0].Neurons.Length;
             int inputNodes = network.Layers[0].InputsCount;
 
-            randRange = new Range(-0.5f, 0.5f);
+            randRange = new Accord.Range(-0.5f, 0.5f);
             beta = 0.7 * Math.Pow(hiddenNodes, 1.0 / inputNodes);
         }
 

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Accord.Audio.DirectSound</AssemblyName>
     <RootNamespace>Accord.Audio.DirectSound</RootNamespace>
-    <TargetFrameworks>netstandard2.0;netstandard1.4;net47</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net47</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
@@ -11,8 +11,8 @@
   <Choose>
     <When Condition="'$(TargetFramework)' != 'net35'">
       <ItemGroup>
-        <PackageReference Include="SharpDX" Version="4.0.1" />
-        <PackageReference Include="SharpDX.DirectSound" Version="4.0.1" />
+        <PackageReference Include="SharpDX" Version="4.2.0" />
+        <PackageReference Include="SharpDX.DirectSound" Version="4.2.0" />
       </ItemGroup>
     </When>
     <Otherwise>
