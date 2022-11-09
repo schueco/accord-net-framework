@@ -23,37 +23,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\Release\net35\Accord.MachineLearning.dll" target="lib\net35-unity full v3.5\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\net35\Accord.MachineLearning.xml" target="lib\net35-unity full v3.5\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\net35\Accord.MachineLearning.dll" target="lib\net35-unity subset v3.5\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\net35\Accord.MachineLearning.xml" target="lib\net35-unity subset v3.5\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\net35\Accord.MachineLearning.dll" target="lib\net35-unity web v3.5\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\net35\Accord.MachineLearning.xml" target="lib\net35-unity web v3.5\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\net35\Accord.MachineLearning.dll" target="lib\net35-unity micro v3.5\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\net35\Accord.MachineLearning.xml" target="lib\net35-unity micro v3.5\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\net35\Accord.MachineLearning.dll" target="lib\net35\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\net35\Accord.MachineLearning.xml" target="lib\net35\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\net40\Accord.MachineLearning.dll" target="lib\net40\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\net40\Accord.MachineLearning.xml" target="lib\net40\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\net45\Accord.MachineLearning.dll" target="lib\net45\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\net45\Accord.MachineLearning.xml" target="lib\net45\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\net46\Accord.MachineLearning.dll" target="lib\net46\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\net46\Accord.MachineLearning.xml" target="lib\net46\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\net462\Accord.MachineLearning.dll" target="lib\net462\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\net462\Accord.MachineLearning.xml" target="lib\net462\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\netstandard2.0\Accord.MachineLearning.dll" target="lib\netstandard2.0\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\netstandard2.0\Accord.MachineLearning.xml" target="lib\netstandard2.0\Accord.MachineLearning.xml" />
-
-    <file src="..\..\Release\netstandard1.4\Accord.MachineLearning.dll" target="lib\netstandard1.4\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\netstandard1.4\Accord.MachineLearning.xml" target="lib\netstandard1.4\Accord.MachineLearning.xml" />
+    <file src="..\..\Release\netstandard2.1\Accord.MachineLearning.dll" target="lib\netstandard2.1\Accord.MachineLearning.dll" />
+    <file src="..\..\Release\netstandard2.1\Accord.MachineLearning.xml" target="lib\netstandard2.1\Accord.MachineLearning.xml" />
   </files>
 </package>
