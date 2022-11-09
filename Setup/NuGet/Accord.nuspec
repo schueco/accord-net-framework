@@ -21,7 +21,7 @@
     <file src="..\..\Release\netstandard2.1\Accord.dll" target="lib\netstandard2.1\Accord.dll" />
     <file src="..\..\Release\netstandard2.1\Accord.xml" target="lib\netstandard2.1\Accord.xml" />
 
-    <!-- <file src="..\..\Release\net45\Accord.dll.config" target="build\Accord.dll.config" /> -->
+    <file src="..\..\Sources\Accord.Core\Accord.dll.config" target="build\Accord.dll.config" />
     <file src="..\..\Setup\Scripts\Accord.targets" target="build\Accord.targets" />
   </files>
 </package>
