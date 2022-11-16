@@ -404,7 +404,14 @@ namespace Accord.MachineLearning.DecisionTrees.Rules
             String value;
             if (codebook != null && codebook.Columns.Contains(name))
             {
-                value = codebook.Revert(name, (int)antecedent.Value);
+                try
+                {
+                    value = codebook.Revert(name, (int)antecedent.Value);
+                }
+                catch (KeyNotFoundException)
+                {
+                    value = string.Empty;
+                }
             }
             else
             {
