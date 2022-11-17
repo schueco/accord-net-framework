@@ -43,7 +43,7 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    jf nuget restore 'Accord.NET (NETStandard).sln'
+                    jf nuget restore '.\\Accord.NET (NETStandard).sln'
                     """
                 }
             }
