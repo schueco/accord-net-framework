@@ -83,7 +83,7 @@
     <OutputFiles Include="$(ProjectDir)bin\$(Configuration)\$(TargetFramework)\**\*.*" />
   </ItemGroup>
 
-  <Target Name="CopyToOutputDir" AfterTargets="Build">
+  <Target Name="CopyToOutputDir" AfterTargets="AfterBuild">
     <Copy SourceFiles="@(OutputFiles)" DestinationFiles="@(OutputFiles->'$(SolutionDir)..\$(Configuration)\$(TargetFramework)\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="false" />
   </Target>
 
