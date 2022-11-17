@@ -55,7 +55,7 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    dotnet build --no-restore --output Release --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    dotnet build --no-restore --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
                     """
                 }
             }
