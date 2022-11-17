@@ -23,7 +23,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\Release\netstandard2.1\Accord.MachineLearning.dll" target="lib\netstandard2.1\Accord.MachineLearning.dll" />
-    <file src="..\..\Release\netstandard2.1\Accord.MachineLearning.xml" target="lib\netstandard2.1\Accord.MachineLearning.xml" />
+    <file src="..\..\Sources\Release\Accord.MachineLearning.dll" target="lib\netstandard2.1\Accord.MachineLearning.dll" />
+    <file src="..\..\Sources\Release\Accord.MachineLearning.xml" target="lib\netstandard2.1\Accord.MachineLearning.xml" />
   </files>
 </package>
