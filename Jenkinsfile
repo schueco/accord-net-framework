@@ -28,8 +28,6 @@ pipeline
                 {
                     script
                     {
-                        env.JFROG = "jf.exe"
-                        getJFrogCli(JFROG: env.JFROG, TARGET: env.WORKSPACE)
                         env.IS_TRIGGERED_BY_USER = !currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').isEmpty()
 
                         env.MULTIBRANCH_PIPELINE_NAME = currentBuild.fullProjectName.split('/')[0]
@@ -45,7 +43,7 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    ${env.WORKSPACE}\\${env.JFROG} nuget restore 'Accord.NET (NETStandard).sln'
+                    jf nuget restore 'Accord.NET (NETStandard).sln'
                     """
                 }
             }
@@ -71,7 +69,7 @@ pipeline
                    script
                    {
                         files = findFiles( glob: '*.nuspec' )
-                        version = powershell(returnStdout: true, script: "Get-Content ${env.WORKSPACE}\\Version.txt")
+                        version = powershell(returnStdout: true, script: "Get-Content ${env.WORKSPACE}\\Version.txt").trim()
 
                         files.each
                         {
@@ -79,9 +77,9 @@ pipeline
                                 bat script: "nuget pack ${f.path} -Version ${version}"
                         }
 
-                        jfrogCliUpload(JFROG: env.JFROG, FILE: '*.nupkg', TARGET: "nuget-local/Accord.NET/${env.JOB_NAME}/${version}/", ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER, FLAT: true)
-                        jfrogCliCollectEnvVar(JFROG: env.JFROG, ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER)
-                        jfrogCliPublishInfo(JFROG: env.JFROG, ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER)
+                        jfrogCliUpload(JFROG: 'jf', FILE: '*.nupkg', TARGET: "nuget-local/Accord.NET/${env.JOB_NAME}/${version}/", ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER, FLAT: true)
+                        jfrogCliCollectEnvVar(JFROG: 'jf', ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER)
+                        jfrogCliPublishInfo(JFROG: 'jf', ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER)
                     }
                 }
             }
