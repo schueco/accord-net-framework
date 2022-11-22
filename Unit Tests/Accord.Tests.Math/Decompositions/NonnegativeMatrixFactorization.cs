@@ -52,7 +52,7 @@ namespace Accord.Tests.Math
             var W = nmf.LeftNonnegativeFactors;
 
             var R = Matrix.Multiply(W, H).Transpose();
-            Assert.IsTrue(R.IsEqual(X, 0.05));
+            Assert.IsTrue(R.IsEqual(X, 0.055));
         }
 
         [Test]
