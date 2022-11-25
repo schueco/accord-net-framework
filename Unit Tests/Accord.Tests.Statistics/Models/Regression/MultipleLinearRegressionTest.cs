@@ -72,7 +72,7 @@ namespace Accord.Tests.Statistics
 
             string str = target.ToString(null, CultureInfo.GetCultureInfo("pt-BR"));
 
-            Assert.AreEqual("y(x0) = -0,264705882352941*x0 + 50,5882352941176", str);
+            Assert.AreEqual("y(x0) = -0,2647058823529411*x0 + 50,58823529411764", str);
         }
 
         [Test]
@@ -110,7 +110,7 @@ namespace Accord.Tests.Statistics
 
             string str = target.ToString(null, CultureInfo.GetCultureInfo("en-US"));
 
-            Assert.AreEqual("y(x0, x1) = -0.264705882352941*x0 + 50.5882352941176*x1", str);
+            Assert.AreEqual("y(x0, x1) = -0.2647058823529411*x0 + 50.58823529411764*x1", str);
         }
 
         [Test]

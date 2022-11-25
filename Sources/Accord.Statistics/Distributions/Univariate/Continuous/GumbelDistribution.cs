@@ -514,9 +514,10 @@ namespace Accord.Statistics.Distributions.Univariate
         /// 
         public override string ToString(string format, IFormatProvider formatProvider)
         {
+            const int digits = 14;
             return String.Format(formatProvider, "Gumbel(x; μ = {0}, β = {1})",
-                mean.ToString(format, formatProvider),
-                beta.ToString(format, formatProvider));
+                Math.Round(mean, digits).ToString(format, formatProvider),
+                Math.Round(beta, digits).ToString(format, formatProvider));
         }
     }
 }
