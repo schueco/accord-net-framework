@@ -49,7 +49,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
-    <DefineConstants>NO_EXCEL;$(DefineConstants)</DefineConstants>
+    <DefineConstants>NO_EXCEL;NO_BINARY_SERIALIZATION;NO_CODE_PROVIDER;NETCORE;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
