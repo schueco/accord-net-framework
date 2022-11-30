@@ -223,6 +223,7 @@ namespace Accord.Tests.MachineLearning
         }
 
         [Test]
+        [Ignore("This test can only be executed in x64")]
         public void learn_test3()
         {
             string path = Path.Combine(TestContext.CurrentContext.WorkDirectory, "tmp");

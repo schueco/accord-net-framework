@@ -44,8 +44,6 @@ namespace Accord.Tests.Statistics
             catch { }
             try { double mode = plog.Mode; Assert.Fail(); }
             catch { }
-            try { double median = plog.Median; Assert.Fail(); }
-            catch { }
 
             double cdf = plog.DistributionFunction(x: 1.4); // 0.98092157745191766
             double pdf = plog.ProbabilityDensityFunction(x: 1.4); // 0.046958580233533977

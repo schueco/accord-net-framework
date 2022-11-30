@@ -226,10 +226,10 @@ namespace Accord.Tests.Statistics
             Assert.AreEqual("Exp(x; λ = 0,342)", actual);
 
             actual = exp.ToString(CultureInfo.InvariantCulture);
-            Assert.AreEqual("Exp(x; λ = 0.342105263157895)", actual);
+            Assert.AreEqual("Exp(x; λ = 0.34210526315789475)", actual);
 
             actual = exp.ToString();
-            Assert.AreEqual("Exp(x; λ = 0,342105263157895)", actual);
+            Assert.AreEqual("Exp(x; λ = 0,34210526315789475)", actual);
         }
     }
 }
