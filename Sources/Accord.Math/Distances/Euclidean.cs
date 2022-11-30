@@ -43,8 +43,10 @@ namespace Accord.Math.Distances
         IMetric<double>, ISimilarity<double>,
         IMetric<double[]>, ISimilarity<double[]>,
         IMetric<Tuple<double, double>>, ISimilarity<Tuple<double, double>>,
-        IDistance<Sparse<double>>, ISimilarity<Sparse<double>>
+        IDistance<Sparse<double>>, ISimilarity<Sparse<double>>,
+        ICloneable
     {
+        
         /// <summary>
         ///   Computes the distance <c>d(x,y)</c> between points
         ///   <paramref name="x"/> and <paramref name="y"/>.
@@ -142,7 +144,7 @@ namespace Accord.Math.Distances
         public double Distance(Tuple<double, double> x, Tuple<double, double> y)
         {
             double dx = x.Item1 - y.Item1;
-            double dy = y.Item1 - y.Item2;
+            double dy = x.Item2 - y.Item2;
             return Math.Sqrt(dx * dx + dy * dy);
         }
 
@@ -216,7 +218,7 @@ namespace Accord.Math.Distances
         public double Similarity(Tuple<double, double> x, Tuple<double, double> y)
         {
             double dx = x.Item1 - y.Item1;
-            double dy = y.Item1 - y.Item2;
+            double dy = x.Item2 - y.Item2;
 
             return 1.0 / (1.0 + Math.Sqrt(dx * dx + dy * dy));
         }
@@ -237,5 +239,16 @@ namespace Accord.Math.Distances
         {
             return 1.0 / (1.0 + Distance(x, y));
         }
+
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>A new object that is a copy of this instance.</returns>
+        public object Clone()
+        {
+            return new Euclidean();
+        }
+
     }
 }

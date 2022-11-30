@@ -45,8 +45,6 @@ namespace Accord.Tests.Statistics
             catch { }
             try { double mode = pnormal.Mode; Assert.Fail(); }
             catch { }
-            try { double median = pnormal.Median; Assert.Fail(); }
-            catch { }
 
             double cdf = pnormal.DistributionFunction(x: 1.4); // 0.99997428721920678
             double pdf = pnormal.ProbabilityDensityFunction(x: 1.4); // 0.00020022645890003279

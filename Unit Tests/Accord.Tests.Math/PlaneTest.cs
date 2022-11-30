@@ -33,23 +33,6 @@ namespace Accord.Tests.Math
     public class PlaneTest
     {
 
-
-        private TestContext testContextInstance;
-
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-
-
         [Test]
         public void FromPointsTest()
         {
@@ -88,7 +71,7 @@ namespace Accord.Tests.Math
             }
 
             {
-                string expected = "x = +0.25y -1.5z +0.08333334";
+                string expected = "x = +0.25y -1.5z +0.083333336";
                 string actual = target.ToString('x', CultureInfo.InvariantCulture);
                 Assert.AreEqual(expected, actual);
             }

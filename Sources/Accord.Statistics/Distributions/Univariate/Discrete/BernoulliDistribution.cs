@@ -451,9 +451,10 @@ namespace Accord.Statistics.Distributions.Univariate
         /// 
         public override string ToString(string format, IFormatProvider formatProvider)
         {
+            const int digits = 14;
             return String.Format(formatProvider, "Bernoulli(x; p = {0}, q = {1})",
-                probability.ToString(format, formatProvider),
-                complement.ToString(format, formatProvider));
+                Math.Round(probability, digits).ToString(format, formatProvider),
+                Math.Round(complement, digits).ToString(format, formatProvider));
         }
     }
 }

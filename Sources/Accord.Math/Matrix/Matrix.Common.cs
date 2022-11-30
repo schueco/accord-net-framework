@@ -96,14 +96,22 @@ namespace Accord.Math
         /// 
         public static Type GetInnerMostType(this Array array)
         {
-            Type type = array.GetType();
-
-            while (type.IsArray)
-                type = type.GetElementType();
-
-            return type;
+            return array.GetType().GetInnerMostType();
         }
 
+        /// <summary>
+        /// Gets the number of bytes contained in an array.
+        /// </summary>
+        /// 
+        public static int GetNumberOfBytes(this Array array)
+        {
+            Type elementType = array.GetInnerMostType();
+#pragma warning disable CS0618 // Type or member is obsolete
+            int elementSize = Marshal.SizeOf(elementType);
+#pragma warning restore CS0618 // Type or member is obsolete
+            int numberOfElements = array.GetTotalLength();
+            return elementSize * numberOfElements;
+        }
 
 
         #region Comparison
@@ -199,9 +207,6 @@ namespace Accord.Math
             if (!objA.GetLength().IsEqual(objB.GetLength()))
                 return false;
 
-            bool jaggedA = objA.IsJagged();
-            bool jaggedB = objB.IsJagged();
-
             // TODO: Implement this cache mechanism here
             // http://blog.slaks.net/2015-06-26/code-snippets-fast-property-access-reflection/
 
@@ -210,6 +215,7 @@ namespace Accord.Math
             Type typeB = objB.GetType();
 
 #if !NETSTANDARD1_4
+
             MethodInfo equals = typeof(Matrix).GetMethod("IsEqual", new Type[] {
                     typeA, typeB, typeof(double), typeof(double)
                 });
@@ -223,7 +229,7 @@ namespace Accord.Math
 #endif
 
             // Base case: arrays contain elements of same nature (both arrays, or both values)
-            if (objA.GetType().GetElementType().IsArray == objB.GetType().GetElementType().IsArray)
+            if (typeA.GetElementType().IsArray == typeB.GetElementType().IsArray)
             {
                 var a = objA.GetEnumerator();
                 var b = objB.GetEnumerator();
@@ -582,6 +588,19 @@ namespace Accord.Math
         /// </summary>
         /// 
         /// <param name="array">A tensor.</param>
+        /// 
+        /// <returns>The transpose of the given tensor.</returns>
+        /// 
+        public static Array Transpose(this Array array)
+        {
+            return Transpose(array, Accord.Math.Vector.Range(array.Rank - 1, -1));
+        }
+
+        /// <summary>
+        ///   Gets the generalized transpose of a tensor.
+        /// </summary>
+        /// 
+        /// <param name="array">A tensor.</param>
         /// <param name="order">The new order for the tensor's dimensions.</param>
         /// 
         /// <returns>The transpose of the given tensor.</returns>
@@ -613,6 +632,9 @@ namespace Accord.Math
 
         private static Array transpose(Array array, int[] order)
         {
+            if (order.Length != array.Rank)
+                throw new ArgumentException("order");
+
             if (array.Length == 1 || array.Length == 0)
                 return array;
 
@@ -624,7 +646,7 @@ namespace Accord.Math
             Array r = Array.CreateInstance(array.GetType().GetElementType(), size.Get(order));
 
             // Generate all indices for accessing the matrix 
-            foreach (int[] pos in Combinatorics.Sequences(size, true))
+            foreach (int[] pos in Combinatorics.Sequences(size, inPlace: true))
             {
                 int[] newPos = pos.Get(order);
                 object value = array.GetValue(pos);
@@ -748,6 +770,48 @@ namespace Accord.Math
         public static int Columns<T>(this T[,] matrix)
         {
             return matrix.GetLength(1);
+        }
+
+        /// <summary>
+        ///   Gets the number of rows in a multidimensional matrix.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in the matrix.</typeparam>
+        /// <param name="matrix">The matrix whose number of rows must be computed.</param>
+        /// 
+        /// <returns>The number of rows in the matrix.</returns>
+        /// 
+        public static int Rows<T>(this T[,,] matrix)
+        {
+            return matrix.GetLength(0);
+        }
+
+        /// <summary>
+        ///   Gets the number of columns in a multidimensional matrix.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in the matrix.</typeparam>
+        /// <param name="matrix">The matrix whose number of columns must be computed.</param>
+        /// 
+        /// <returns>The number of columns in the matrix.</returns>
+        /// 
+        public static int Columns<T>(this T[,,] matrix)
+        {
+            return matrix.GetLength(1);
+        }
+
+        /// <summary>
+        ///   Gets the number of columns in a multidimensional matrix.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in the matrix.</typeparam>
+        /// <param name="matrix">The matrix whose number of columns must be computed.</param>
+        /// 
+        /// <returns>The number of columns in the matrix.</returns>
+        /// 
+        public static int Depth<T>(this T[,,] matrix)
+        {
+            return matrix.GetLength(2);
         }
 
         /// <summary>
@@ -1011,7 +1075,7 @@ namespace Accord.Math
                     break;
                 case MatrixType.UpperTriangular:
                     for (int i = 0; i < matrix.Rows(); i++)
-                        for (int j = i; j <= matrix.Columns(); j++)
+                        for (int j = i; j < matrix.Columns(); j++)
                             result[i, j] = result[j, i] = matrix[i, j];
                     break;
                 default:
@@ -1504,13 +1568,37 @@ namespace Accord.Math
 
 
         #region Rounding and discretization
+        // TODO: Rewrite using T4 templates for float and double
+
+        /// <summary>
+        ///   Rounds a double-precision floating-point matrix to a specified number of fractional digits.
+        /// </summary>
+        /// 
+        public static float[,] Round(this float[,] matrix, int decimals = 0)
+        {
+            if (matrix == null)
+                throw new ArgumentNullException("matrix");
+
+            int rows = matrix.GetLength(0);
+            int cols = matrix.GetLength(1);
+
+            float[,] result = new float[rows, cols];
+
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    result[i, j] = (float)System.Math.Round(matrix[i, j], decimals);
+
+            return result;
+        }
+
         /// <summary>
         ///   Rounds a double-precision floating-point matrix to a specified number of fractional digits.
         /// </summary>
         /// 
         public static double[,] Round(this double[,] matrix, int decimals = 0)
         {
-            if (matrix == null) throw new ArgumentNullException("matrix");
+            if (matrix == null)
+                throw new ArgumentNullException("matrix");
 
             int rows = matrix.GetLength(0);
             int cols = matrix.GetLength(1);
@@ -1531,7 +1619,8 @@ namespace Accord.Math
         /// 
         public static double[,] Floor(this double[,] matrix)
         {
-            if (matrix == null) throw new ArgumentNullException("matrix");
+            if (matrix == null)
+                throw new ArgumentNullException("matrix");
 
             int rows = matrix.GetLength(0);
             int cols = matrix.GetLength(1);
@@ -1551,7 +1640,8 @@ namespace Accord.Math
         /// </summary>
         public static double[,] Ceiling(this double[,] matrix)
         {
-            if (matrix == null) throw new ArgumentNullException("matrix");
+            if (matrix == null)
+                throw new ArgumentNullException("matrix");
 
             int rows = matrix.GetLength(0);
             int cols = matrix.GetLength(1);
@@ -1570,11 +1660,26 @@ namespace Accord.Math
         /// </summary>
         public static double[] Round(double[] vector, int decimals = 0)
         {
-            if (vector == null) throw new ArgumentNullException("vector");
+            if (vector == null)
+                throw new ArgumentNullException("vector");
 
             double[] result = new double[vector.Length];
             for (int i = 0; i < result.Length; i++)
                 result[i] = Math.Round(vector[i], decimals);
+            return result;
+        }
+
+        /// <summary>
+        ///   Rounds a double-precision floating-point number array to a specified number of fractional digits.
+        /// </summary>
+        public static float[] Round(float[] vector, int decimals = 0)
+        {
+            if (vector == null)
+                throw new ArgumentNullException("vector");
+
+            float[] result = new float[vector.Length];
+            for (int i = 0; i < result.Length; i++)
+                result[i] = (float)Math.Round(vector[i], decimals);
             return result;
         }
 
@@ -1584,7 +1689,8 @@ namespace Accord.Math
         /// </summary>
         public static double[] Floor(double[] vector)
         {
-            if (vector == null) throw new ArgumentNullException("vector");
+            if (vector == null)
+                throw new ArgumentNullException("vector");
 
             double[] result = new double[vector.Length];
             for (int i = 0; i < result.Length; i++)
@@ -1598,7 +1704,8 @@ namespace Accord.Math
         /// </summary>
         public static double[] Ceiling(double[] vector)
         {
-            if (vector == null) throw new ArgumentNullException("vector");
+            if (vector == null)
+                throw new ArgumentNullException("vector");
 
             double[] result = new double[vector.Length];
             for (int i = 0; i < result.Length; i++)

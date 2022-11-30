@@ -182,12 +182,13 @@ namespace Accord.MachineLearning.DecisionTrees.Rules
             double output = current.Output.Value;
 
             var antecedents = new List<Antecedent>();
+            int digits = 14;
 
             while (current.Parent != null)
             {
                 int index = current.Parent.Branches.AttributeIndex;
                 ComparisonKind comparison = current.Comparison;
-                double value = current.Value.Value;
+                double value = Math.Round(current.Value.Value, digits);
 
                 antecedents.Insert(0, new Antecedent(index, comparison, value));
 
@@ -404,7 +405,14 @@ namespace Accord.MachineLearning.DecisionTrees.Rules
             String value;
             if (codebook != null && codebook.Columns.Contains(name))
             {
-                value = codebook.Revert(name, (int)antecedent.Value);
+                try
+                {
+                    value = codebook.Revert(name, (int)antecedent.Value);
+                }
+                catch (KeyNotFoundException)
+                {
+                    value = string.Empty;
+                }
             }
             else
             {

@@ -32,7 +32,7 @@ namespace Accord.DataSets.Base
     using System.Threading;
 
     /// <summary>
-    ///   Base class for sparse datasets that can be downloaded from LIBSVM website.
+    ///   Base class for datasets that can be downloaded from the web.
     /// </summary>
     /// 
     [Serializable]
@@ -71,6 +71,21 @@ namespace Accord.DataSets.Base
         }
 
         /// <summary>
+        ///   Downloads a file from the specified <paramref name="url"/>.
+        /// </summary>
+        /// 
+        /// <param name="url">The URL where the file should be downloaded from.</param>
+        /// 
+        /// <returns><c>true</c> if the download succeeded, <c>false</c> otherwise.</returns>
+        /// 
+        public string Download(string url)
+        {
+            string uncompressedFileName;
+            Download(url, Path, out uncompressedFileName);
+            return uncompressedFileName;
+        }
+
+        /// <summary>
         ///   Downloads a file from the specified <paramref name="url"/>, 
         ///   storing in <paramref name="localPath"/>, under name <paramref name="uncompressedFileName"/>.
         /// </summary>
@@ -83,7 +98,7 @@ namespace Accord.DataSets.Base
         /// 
         public static bool Download(string url, string localPath, out string uncompressedFileName)
         {
-            string name = System.IO.Path.GetFileName(url);
+            //string name = System.IO.Path.GetFileName(url);
             string localFileName = System.IO.Path.GetFileName(url);
             return Download(url, localPath, localFileName, out uncompressedFileName);
         }

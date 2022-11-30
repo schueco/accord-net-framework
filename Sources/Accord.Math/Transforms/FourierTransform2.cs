@@ -1,4 +1,4 @@
-﻿// Accord Math Library
+// Accord Math Library
 // The Accord.NET Framework
 // http://accord-framework.net
 //
@@ -8,6 +8,9 @@
 // Copyright © Nayuki Minase, 2014
 // nayuki at eigenstate.org
 // http://nayuki.eigenstate.org/page/free-small-fft-in-multiple-languages
+//
+// Copyright © Guney Ozsan, 2019
+// guneyozsan at gmail.com
 //
 //    This library is free software; you can redistribute it and/or
 //    modify it under the terms of the GNU Lesser General Public
@@ -68,10 +71,29 @@ namespace Accord.Math.Transforms
     ///   original FourierTransform class</see> that would provide more expected results.</para>
     /// </remarks>
     /// 
+    /// <example>
+    /// <para>
+    ///   The following examples show how to compute 1-D Discrete Fourier Transform and 
+    ///   1-D Fast Fourier Transforms, respectively:</para>
+    /// <code source="Unit Tests\Accord.Tests.Math\FourierTransformTest.cs" region="doc_dft" />
+    /// <code source="Unit Tests\Accord.Tests.Math\FourierTransformTest.cs" region="doc_fft" />
+    /// 
+    /// <para>
+    ///   The next examples show how to compute 2-D Discrete Fourier Transform and 
+    ///   2-D Fast Fourier Transforms, respectively:</para>
+    /// <code source="Unit Tests\Accord.Tests.Math\FourierTransformTest.cs" region="doc_dft2" />
+    /// <code source="Unit Tests\Accord.Tests.Math\FourierTransformTest.cs" region="doc_fft2" />
+    /// </example>
+    /// 
     /// <seealso cref="FourierTransform"/>
     /// 
     public static class FourierTransform2
     {
+        // Trigonometric tables cached.
+        private static double[] cosTable;
+        private static double[] sinTable;
+        private static double[] expCosTable;
+        private static double[] expSinTable;
 
         /// <summary>
         ///   1-D Discrete Fourier Transform.
@@ -80,7 +102,9 @@ namespace Accord.Math.Transforms
         /// <param name="data">The data to transform.</param>
         /// <param name="direction">The transformation direction.</param>
         /// 
+        /// <example>
         /// <code source="Unit Tests\Accord.Tests.Math\FourierTransformTest.cs" region="doc_dft" />
+        /// </example>
         /// 
         public static void DFT(Complex[] data, FourierTransform.Direction direction)
         {
@@ -131,7 +155,9 @@ namespace Accord.Math.Transforms
         /// <param name="data">The data to transform.</param>
         /// <param name="direction">The transformation direction.</param>
         /// 
+        /// <example>
         /// <code source="Unit Tests\Accord.Tests.Math\FourierTransformTest.cs" region="doc_dft2" />
+        /// </example>
         /// 
         public static void DFT2(Complex[][] data, FourierTransform.Direction direction)
         {
@@ -196,7 +222,9 @@ namespace Accord.Math.Transforms
         /// <param name="data">The data to transform..</param>
         /// <param name="direction">The transformation direction.</param>
         /// 
+        /// <example>
         /// <code source="Unit Tests\Accord.Tests.Math\FourierTransformTest.cs" region="doc_fft" />
+        /// </example>
         /// 
         public static void FFT(Complex[] data, FourierTransform.Direction direction)
         {
@@ -241,7 +269,9 @@ namespace Accord.Math.Transforms
         /// <param name="imag">The imaginary part of the complex numbers to transform.</param>
         /// <param name="direction">The transformation direction.</param>
         /// 
+        /// <example>
         /// <code source="Unit Tests\Accord.Tests.Math\FourierTransformTest.cs" region="doc_fft" />
+        /// </example>
         /// 
         public static void FFT(double[] real, double[] imag, FourierTransform.Direction direction)
         {
@@ -271,7 +301,9 @@ namespace Accord.Math.Transforms
         /// <param name="data">The data to transform.</param>
         /// <param name="direction">The Transformation direction.</param>
         /// 
+        /// <example>
         /// <code source="Unit Tests\Accord.Tests.Math\FourierTransformTest.cs" region="doc_fft2" />
+        /// </example>
         /// 
         public static void FFT2(Complex[][] data, FourierTransform.Direction direction)
         {
@@ -396,14 +428,9 @@ namespace Accord.Math.Transforms
             if (1 << levels != n)
                 throw new ArgumentException("Length is not a power of 2");
 
-            // TODO: keep those tables in memory
-            var cosTable = new double[n / 2];
-            var sinTable = new double[n / 2];
-            for (int i = 0; i < n / 2; i++)
-            {
-                cosTable[i] = Math.Cos(2 * Math.PI * i / n);
-                sinTable[i] = Math.Sin(2 * Math.PI * i / n);
-            }
+            // Trigonometric tables.
+            double[] cosTable = CosTable(n / 2);
+            double[] sinTable = SinTable(n / 2);
 
             // Bit-reversed addressing permutation
             for (int i = 0; i < real.Length; i++)
@@ -469,15 +496,10 @@ namespace Accord.Math.Transforms
 
             if (1 << levels != n)
                 throw new ArgumentException("Length is not a power of 2");
-
-            // TODO: keep those tables in memory
-            var cosTable = new double[n / 2];
-            var sinTable = new double[n / 2];
-            for (int i = 0; i < n / 2; i++)
-            {
-                cosTable[i] = Math.Cos(2 * Math.PI * i / n);
-                sinTable[i] = Math.Sin(2 * Math.PI * i / n);
-            }
+            
+            // Trigonometric tables.
+            double[] cosTable = CosTable(n / 2);
+            double[] sinTable = SinTable(n / 2);
 
             // Bit-reversed addressing permutation
             for (int i = 0; i < complex.Length; i++)
@@ -537,16 +559,10 @@ namespace Accord.Math.Transforms
             int n = real.Length;
             int m = HighestOneBit(n * 2 + 1) << 1;
 
-            // Trignometric tables
-            var cosTable = new double[n];
-            var sinTable = new double[n];
-            for (int i = 0; i < cosTable.Length; i++)
-            {
-                int j = (int)((long)i * i % (n * 2));  // This is more accurate than j = i * i
-                cosTable[i] = Math.Cos(Math.PI * j / n);
-                sinTable[i] = Math.Sin(Math.PI * j / n);
-            }
-
+            // Trigonometric tables.
+            double[] cosTable = ExpCosTable(n);
+            double[] sinTable = ExpSinTable(n);
+            
             // Temporary vectors and preprocessing
             var areal = new double[m];
             var aimag = new double[m];
@@ -585,16 +601,10 @@ namespace Accord.Math.Transforms
             int n = data.Length;
             int m = HighestOneBit(n * 2 + 1) << 1;
 
-            // Trignometric tables
-            var cosTable = new double[n];
-            var sinTable = new double[n];
-            for (int i = 0; i < cosTable.Length; i++)
-            {
-                int j = (int)((long)i * i % (n * 2));  // This is more accurate than j = i * i
-                cosTable[i] = Math.Cos(Math.PI * j / n);
-                sinTable[i] = Math.Sin(Math.PI * j / n);
-            }
-
+            // Trigonometric tables.
+            double[] cosTable = ExpCosTable(n);
+            double[] sinTable = ExpSinTable(n);
+            
             // Temporary vectors and preprocessing
             var areal = new double[m];
             var aimag = new double[m];
@@ -725,5 +735,195 @@ namespace Accord.Math.Transforms
             return i;
         }
 
+        /// <summary>
+        ///   Computes the Magnitude spectrum of a complex signal.
+        /// </summary>
+        /// 
+        public static double[] GetMagnitudeSpectrum(Complex[] fft)
+        {
+            if (fft == null)
+                throw new ArgumentNullException("fft");
+
+            // assumes fft is symmetric
+
+            // In a two-sided spectrum, half the energy is displayed at the positive frequency,
+            // and half the energy is displayed at the negative frequency. Therefore, to convert
+            // from a two-sided spectrum to a single-sided spectrum, discard the second half of
+            // the array and multiply every point except for DC by two.
+
+            int numUniquePts = (int)System.Math.Ceiling((fft.Length + 1) / 2.0);
+            double[] mx = new double[numUniquePts];
+
+            mx[0] = fft[0].Magnitude / fft.Length;
+            for (int i = 0; i < numUniquePts; i++)
+                mx[i] = fft[i].Magnitude * 2 / fft.Length;
+
+            return mx;
+        }
+
+        /// <summary>
+        ///   Computes the Power spectrum of a complex signal.
+        /// </summary>
+        /// 
+        public static double[] GetPowerSpectrum(Complex[] fft)
+        {
+            if (fft == null)
+                throw new ArgumentNullException("fft");
+
+            int n = (int)System.Math.Ceiling((fft.Length + 1) / 2.0);
+
+            double[] mx = new double[n];
+
+            mx[0] = fft[0].SquaredMagnitude() / fft.Length;
+
+            for (int i = 1; i < n; i++)
+                mx[i] = fft[i].SquaredMagnitude() * 2.0 / fft.Length;
+
+            return mx;
+        }
+
+        /// <summary>
+        ///   Computes the Phase spectrum of a complex signal.
+        /// </summary>
+        /// 
+        public static double[] GetPhaseSpectrum(Complex[] fft)
+        {
+            if (fft == null) throw new ArgumentNullException("fft");
+
+            int n = (int)System.Math.Ceiling((fft.Length + 1) / 2.0);
+
+            double[] mx = new double[n];
+
+            for (int i = 0; i < n; i++)
+                mx[i] = fft[i].Phase;
+
+            return mx;
+        }
+
+        /// <summary>
+        ///   Creates an evenly spaced frequency vector (assuming a symmetric FFT)
+        /// </summary>
+        /// 
+        public static double[] GetFrequencyVector(int length, int sampleRate)
+        {
+            int numUniquePts = (int)System.Math.Ceiling((length + 1) / 2.0);
+
+            double[] freq = new double[numUniquePts];
+            for (int i = 0; i < numUniquePts; i++)
+                freq[i] = i * sampleRate / (double)length;
+
+            return freq;
+        }
+
+        /// <summary>
+        ///   Gets the spectral resolution for a signal of given sampling rate and number of samples.
+        /// </summary>
+        /// 
+        public static double GetSpectralResolution(int samplingRate, int samples)
+        {
+            return samplingRate / (double)samples;
+        }
+
+        /// <summary>
+        ///   Gets the power Cepstrum for a complex signal.
+        /// </summary>
+        /// 
+        public static double[] GetPowerCepstrum(Complex[] signal)
+        {
+            if (signal == null)
+                throw new ArgumentNullException("signal");
+
+            FourierTransform.FFT(signal, FourierTransform.Direction.Backward);
+
+            Complex[] logabs = new Complex[signal.Length];
+            for (int i = 0; i < logabs.Length; i++)
+                logabs[i] = new Complex(System.Math.Log(signal[i].Magnitude), 0);
+
+            FourierTransform.FFT(logabs, FourierTransform.Direction.Forward);
+
+            return logabs.Re();
+        }
+
+        /// <summary>
+        ///   Gets a half period cosine table.
+        ///   Keeps the results in memory and reuses if parameters are the same.
+        /// </summary>
+        /// 
+        private static double[] CosTable(int sampleCount)
+        {
+            // Return table from memory if period matches.
+            if (cosTable != null && sampleCount == cosTable.Length)
+                return cosTable;
+
+            // Create a new table and keep in memory.
+            cosTable = new double[sampleCount];
+            for (int i = 0; i < sampleCount; i++)
+            {
+                cosTable[i] = Math.Cos(Math.PI * i / sampleCount);
+            }
+            return cosTable;
+        }
+
+        /// <summary>
+        ///   Gets a half period sinus table.
+        ///   Keeps the results in memory and reuses if parameters are the same.
+        /// </summary>
+        ///
+        private static double[] SinTable(int sampleCount)
+        {
+            // Return table from memory if period matches.
+            if (sinTable != null && sampleCount == sinTable.Length)
+                return sinTable;
+
+            // Create a new table and keep in memory.
+            sinTable = new double[sampleCount];
+            for (int i = 0; i < sampleCount; i++)
+            {
+                sinTable[i] = Math.Sin(Math.PI * i / sampleCount);
+            }
+            return sinTable;
+        }
+        
+        /// <summary>
+        ///   Gets a cosine table with exponentially increasing frequency by i * i.
+        ///   Keeps the results in memory and reuses if parameters are the same.
+        /// </summary>
+        ///
+        private static double[] ExpCosTable(int sampleCount)
+        {
+            // Return table from memory if period matches.
+            if (expCosTable != null && sampleCount == expCosTable.Length)
+                return expCosTable;
+
+            // Create a new table and keep in memory.
+            expCosTable = new double[sampleCount];
+            for (int i = 0; i < sampleCount; i++)
+            {
+                int j = (int)((long)i * i % (sampleCount * 2));  // This is more accurate than j = i * i
+                expCosTable[i] = Math.Cos(Math.PI * j / sampleCount);
+            }
+            return expCosTable;
+        }
+
+        /// <summary>
+        ///   Gets a sinus table with exponentially increasing frequency by i * i.
+        ///   Keeps the results in memory and reuses if parameters are the same.
+        /// </summary>
+        ///
+        private static double[] ExpSinTable(int sampleCount)
+        {
+            // Return table from memory if period matches.
+            if (expSinTable != null && sampleCount == expSinTable.Length)
+                return expSinTable;
+
+            // Create a new table and keep in memory.
+            expSinTable = new double[sampleCount];
+            for (int i = 0; i < sampleCount; i++)
+            {
+                int j = (int)((long)i * i % (sampleCount * 2));  // This is more accurate than j = i * i
+                expSinTable[i] = Math.Sin(Math.PI * j / sampleCount);
+            }
+            return expSinTable;
+        }
     }
 }

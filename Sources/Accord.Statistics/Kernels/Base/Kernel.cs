@@ -263,7 +263,7 @@ namespace Accord.Statistics.Kernels
         /// <param name="samples">The number of samples.</param>
         /// 
         public static double[] Distances<T>(this T kernel, double[][] inputs, int samples)
-            where T : IDistance, ICloneable
+            where T : IDistance<double[]>, ICloneable
         {
             int[] idx = Vector.Sample(samples, inputs.Length);
             int[] idy = Vector.Sample(samples, inputs.Length);
@@ -422,7 +422,7 @@ namespace Accord.Statistics.Kernels
             double[,] r = Center(kernelMatrix.ToMatrix(), rowMean, mean);
 #endif
 
-            int cols = kernelMatrix.Columns();
+            //int cols = kernelMatrix.Columns();
              
             double[] rowMean1 = kernelMatrix.Mean(1);
             for (int i = 0; i < result.Length; i++)

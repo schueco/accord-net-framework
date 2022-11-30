@@ -757,7 +757,7 @@ namespace Accord.Tests.Statistics
             IKernel kernel = new Gaussian(5);
 
             // Create analysis
-            KernelPrincipalComponentAnalysis target = new KernelPrincipalComponentAnalysis(matrix,
+            var target = new KernelPrincipalComponentAnalysis(matrix,
                 kernel, AnalysisMethod.Center, centerInFeatureSpace: false);
 
             target.Compute();
@@ -789,7 +789,7 @@ namespace Accord.Tests.Statistics
             // can go further and transform it into a matrix to start
             // running other algorithms on it: 
 
-            double[][] matrix = table.ToArray();
+            double[][] matrix = table.ToJagged();
 
             IKernel kernel = new Gaussian(5);
 
@@ -834,7 +834,7 @@ namespace Accord.Tests.Statistics
             IKernel kernel = new Polynomial(2);
 
             // Create analysis
-            KernelPrincipalComponentAnalysis target = new KernelPrincipalComponentAnalysis(matrix,
+            var target = new KernelPrincipalComponentAnalysis(matrix,
                 kernel, AnalysisMethod.Center, centerInFeatureSpace: true);
 
             target.Compute();
@@ -1124,7 +1124,7 @@ namespace Accord.Tests.Statistics
                 { -1.22382056,  -0.162675287 },
             }.Multiply(-1);
 
-            
+
 
             // Now we can transform new data using KPCA by 
             // again feeding a kernel matrix manually:

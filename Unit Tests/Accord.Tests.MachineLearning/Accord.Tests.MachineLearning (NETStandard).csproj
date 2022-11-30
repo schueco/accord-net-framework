@@ -3,32 +3,18 @@
   <PropertyGroup>
     <AssemblyName>Accord.Tests.MachineLearning</AssemblyName>
     <RootNamespace>Accord.Tests.MachineLearning</RootNamespace>
-    <TargetFrameworks>netcoreapp2.0;netcoreapp1.1<!--;net462--></TargetFrameworks>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)../Unit Tests/Accord.Tests (NETStandard).targets" />
 
-  <Choose>
-    <When Condition="'$(TargetFramework)' == 'netcoreapp2.0' OR '$(TargetFramework)' == 'netcoreapp1.1'">
-      <ItemGroup>
-        <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="System.ComponentModel.DataAnnotations" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
-  
   <ItemGroup>
-    <Compile Include="..\..\Samples\MachineLearning\Liblinear (SVMs)\Parameters.cs" />
-    <Compile Include="..\..\Samples\MachineLearning\Liblinear (SVMs)\Problem.cs" />
-    <Compile Include="..\..\Samples\MachineLearning\Liblinear (SVMs)\Train.cs" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.CodeDom" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,9 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="..\..\Samples\MachineLearning\Liblinear %28SVMs%29\Parameters.cs" Link="VectorMachines\Liblinear\Parameters.cs" />
-    <Compile Update="..\..\Samples\MachineLearning\Liblinear %28SVMs%29\Problem.cs" Link="VectorMachines\Liblinear\Problem.cs" />
-    <Compile Update="..\..\Samples\MachineLearning\Liblinear %28SVMs%29\Train.cs" Link="VectorMachines\Liblinear\Train.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -151,9 +134,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Update="NUnit" Version="3.8.1" />
-    <PackageReference Update="NUnit.Console" Version="3.7.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.7.0" />
+    <PackageReference Update="NUnit" Version="3.12.0" />
+    <PackageReference Update="NUnit.Console" Version="3.11.1" />
+    <PackageReference Update="NUnit3TestAdapter" Version="3.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="IO\" />
   </ItemGroup>
 
   <!--<ItemGroup>

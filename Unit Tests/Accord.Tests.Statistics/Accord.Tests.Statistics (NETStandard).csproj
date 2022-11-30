@@ -1,25 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="$(SolutionDir)../Unit Tests/Accord.Tests (NETStandard).targets" />
+  
   <PropertyGroup>
     <RootNamespace>Accord.Tests.Statistics</RootNamespace>
     <AssemblyName>Accord.Tests.Statistics</AssemblyName>
-    <TargetFrameworks>netcoreapp2.0;netcoreapp1.1<!--;net462--></TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
-  <Import Project="$(SolutionDir)../Unit Tests/Accord.Tests (NETStandard).targets" />
-
-  <Choose>
-    <When Condition="'$(TargetFramework)' == 'netcoreapp2.0' OR '$(TargetFramework)' == 'netcoreapp1.1'">
-      <ItemGroup>
-        <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="System.ComponentModel.DataAnnotations" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Sources\Accord.DataSets\Accord.DataSets (NETStandard).csproj" />
@@ -27,6 +18,21 @@
     <ProjectReference Include="..\..\Sources\Accord.Statistics\Accord.Statistics (NETStandard).csproj" />
     <ProjectReference Include="..\..\Sources\Accord.Math.Core\Accord.Math.Core (NETStandard).csproj" />
     <ProjectReference Include="..\..\Sources\Accord.Math\Accord.Math (NETStandard).csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -72,9 +78,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Update="NUnit" Version="3.8.1" />
-    <PackageReference Update="NUnit.Console" Version="3.7.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.7.0" />
+    <PackageReference Update="NUnit" Version="3.12.0" />
+    <PackageReference Update="NUnit.Console" Version="3.11.1" />
+    <PackageReference Update="NUnit3TestAdapter" Version="3.17.0" />
   </ItemGroup>
 
 </Project>

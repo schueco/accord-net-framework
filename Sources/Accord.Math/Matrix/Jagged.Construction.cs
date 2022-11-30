@@ -101,10 +101,8 @@ namespace Accord.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static T[][] Ones<T>(int rows, int columns)
-            where T : struct
         {
-            var one = (T)System.Convert.ChangeType(1, typeof(T));
-            return Create<T>(rows, columns, one);
+            return Create<T>(rows, columns, Constants.One<T>());
         }
 
         /// <summary>
@@ -192,42 +190,90 @@ namespace Accord.Math
         /// 
         /// <param name="elementType">The type of the elements to be contained in the matrix.</param>
         /// <param name="shape">The number of dimensions that the matrix should have.</param>
+        /// <param name="value">The initial values for the vector.</param>
         /// 
         /// <returns>A matrix of the specified size.</returns>
         /// 
 #if NET45 || NET46 || NET462 || NETSTANDARD2_0
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-        public static Array Create(Type elementType, params int[] shape)
+        public static Array Create(Type elementType, int[] shape, object value)
         {
-            int s = shape[0];
+            return create(elementType, shape, 0, value);
+        }
 
-            if (shape.Length == 1)
+        private static Array create(Type elementType, int[] shape, int dimension, object value)
+        {
+            Type arrayType = elementType.MakeArrayType(shape.Length - dimension - 1, jagged: true);
+            Array array = Array.CreateInstance(arrayType, shape[dimension]);
+
+            if (dimension < shape.Length - 1)
             {
-                return Array.CreateInstance(elementType, s);
+                for (int i = 0; i < array.Length; i++)
+                    array.SetValue(create(elementType, shape, dimension + 1, value), i);
             }
             else
             {
-                int[] rest = shape.Get(1, 0);
-
-                if (s == 0)
-                {
-                    Array dummy = Array.CreateInstance(elementType, rest);
-                    Array container = Array.CreateInstance(dummy.GetType(), 0);
-                    return container;
-                }
-                else
-                {
-                    Array first = Jagged.Create(elementType, rest);
-                    Array container = Array.CreateInstance(first.GetType(), s);
-
-                    container.SetValue(first, 0);
-                    for (int i = 1; i < container.Length; i++)
-                        container.SetValue(Create(elementType, rest), i);
-
-                    return container;
-                }
+                for (int i = 0; i < array.Length; i++)
+                    array.SetValue(value, i);
             }
+
+            return array;
+        }
+
+        /// <summary>
+        ///   Creates a jagged matrix with all values set to a given value.
+        /// </summary>
+        /// 
+        /// <param name="shape">The number of dimensions that the matrix should have.</param>
+        /// <param name="value">The initial values for the vector.</param>
+        /// 
+        /// <returns>A matrix of the specified size.</returns>
+        /// 
+#if NET45 || NET46 || NET462 || NETSTANDARD2_0
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+        public static Array Create<T>(int[] shape, T value)
+        {
+            return Create(typeof(T), shape, value);
+        }
+
+        /// <summary>
+        ///   Creates a jagged matrix with all values set to zero.
+        /// </summary>
+        /// 
+        /// <param name="elementType">The type of the elements to be contained in the matrix.</param>
+        /// <param name="shape">The number of dimensions that the matrix should have.</param>
+        /// 
+        /// <returns>A matrix of the specified size.</returns>
+        /// 
+#if NET45 || NET46 || NET462 || NETSTANDARD2_0
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+        public static Array Zeros(Type elementType, params int[] shape)
+        {
+#if !NETSTANDARD1_4
+            return Create(elementType, shape, elementType.GetDefaultValue());
+#else
+            return Create(elementType, shape, 0);
+#endif
+        }
+
+
+        /// <summary>
+        ///   Creates a jagged matrix with all values set to zero.
+        /// </summary>
+        /// 
+        /// <param name="shape">The number of dimensions that the matrix should have.</param>
+        /// 
+        /// <returns>A matrix of the specified size.</returns>
+        /// 
+#if NET45 || NET46 || NET462 || NETSTANDARD2_0
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+        public static Array Zeros<T>(params int[] shape)
+        {
+            return Create(typeof(T), shape, 0);
         }
 
         /// <summary>
@@ -433,7 +479,7 @@ namespace Accord.Math
 #endif
         public static T[][] OneHot<T>(bool[] mask, T[][] result)
         {
-            var one = (T)System.Convert.ChangeType(1, typeof(T));
+            var one = Constants.One<T>();
             for (int i = 0; i < mask.Length; i++)
                 if (mask[i])
                     result[i][0] = one;
@@ -460,7 +506,7 @@ namespace Accord.Math
 #endif
         public static T[][] OneHot<T>(int[] indices, T[][] result)
         {
-            var one = (T)System.Convert.ChangeType(1, typeof(T));
+            var one = Constants.One<T>();
             for (int i = 0; i < indices.Length; i++)
                 result[i][indices[i]] = one;
             return result;
@@ -588,7 +634,7 @@ namespace Accord.Math
 #endif
         public static T[][] KHot<T>(bool[][] mask, T[][] result)
         {
-            var one = (T)System.Convert.ChangeType(1, typeof(T));
+            var one = Constants.One<T>();
             for (int i = 0; i < mask.Length; i++)
                 for (int j = 0; j < mask[0].Length; j++)
                     if (mask[i][j])
@@ -614,7 +660,7 @@ namespace Accord.Math
 #endif
         public static T[][] KHot<T>(int[][] indices, T[][] result)
         {
-            var one = (T)System.Convert.ChangeType(1, typeof(T));
+            var one = Constants.One<T>();
             for (int i = 0; i < indices.Length; i++)
                 for (int j = 0; j < indices[0].Length; j++)
                     result[i][indices[i][j]] = one;
@@ -643,8 +689,24 @@ namespace Accord.Math
             return result;
         }
 
+        /// <summary>
+        ///   Creates a new multidimensional matrix with the same shape as another matrix.
+        /// </summary>
+        /// 
+#if NET45 || NET46 || NET462 || NETSTANDARD2_0
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+        public static Array CreateAs(Array matrix, Type type)
+        {
+            int[] outputShape = Matrix.GetShape(matrix, type);
 
-
+#if !NETSTANDARD1_4
+            // multidimensional or jagged -> jagged
+            return Jagged.Create(elementType: type.GetInnerMostType(), shape: outputShape, value: type.GetDefaultValue());
+#else
+            return Jagged.Create(elementType: type.GetInnerMostType(), shape: outputShape, value: 0);
+#endif
+        }
 
         /// <summary>
         ///   Creates a new multidimensional matrix with the same shape as another matrix.
@@ -715,7 +777,7 @@ namespace Accord.Math
         /// 
         public static T[][] Identity<T>(int size)
         {
-            return Diagonal(size, (T)System.Convert.ChangeType(1, typeof(T)));
+            return Diagonal(size, Constants.One<T>());
         }
 
         /// <summary>

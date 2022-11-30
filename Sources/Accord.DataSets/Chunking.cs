@@ -90,11 +90,11 @@ namespace Accord.DataSets
         public Chunking(string path = null)
             : base(path)
         {
-            //Training = download("http://www.cnts.ua.ac.be/conll2000/chunking/train.txt.gz");
-            Training = download("https://onedrive.live.com/download?cid=808347681CC09388&resid=808347681CC09388%21529599&authkey=AEZPMjdmJutTF3k", "train.txt.gz");
+            //Training = download("http://www.cnts.ua.ac.be/conll2000/chunking/train.txt.gz", "train.txt.gz");
+            Training = download("http://onedrive.live.com/download?cid=808347681CC09388&resid=808347681CC09388%21529599&authkey=AEZPMjdmJutTF3k", "train.txt.gz");
 
-            //Testing = download("http://www.cnts.ua.ac.be/conll2000/chunking/test.txt.gz");
-            Testing = download("https://onedrive.live.com/download?cid=808347681CC09388&resid=808347681CC09388%21529598&authkey=AJ9SOABWAcm0FRY", "test.txt.gz");
+            //Testing = download("http://www.cnts.ua.ac.be/conll2000/chunking/test.txt.gz", "test.txt.gz");
+            Testing = download("http://onedrive.live.com/download?cid=808347681CC09388&resid=808347681CC09388%21529598&authkey=AJ9SOABWAcm0FRY", "test.txt.gz");
 
             var trainWords = unique(Training.Item1);
             var testWords = unique(Testing.Item1);
@@ -132,7 +132,7 @@ namespace Accord.DataSets
 #if NET35
             foreach (string line in File.ReadAllLines(uncompressedFileName))
             {
-                if (line == null || String.IsNullOrEmpty(line.Trim()))
+                if (StringEx.IsNullOrWhiteSpace(line))
                 {
 #else
             foreach (string line in File.ReadLines(uncompressedFileName))

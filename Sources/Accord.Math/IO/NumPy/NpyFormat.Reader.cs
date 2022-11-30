@@ -273,7 +273,7 @@ IList, ICollection, IEnumerable
                 if (!parseReader(reader, out bytes, out type, out shape))
                     throw new FormatException();
 
-                Array matrix = Matrix.Create(type, shape);
+                Array matrix = Matrix.Zeros(type, shape);
 
                 if (type == typeof(String))
                     return readStringMatrix(reader, matrix, bytes, type, shape);
@@ -304,7 +304,7 @@ IList, ICollection, IEnumerable
                 if (!parseReader(reader, out bytes, out type, out shape))
                     throw new FormatException();
 
-                Array matrix = Jagged.Create(type, shape);
+                Array matrix = Jagged.Zeros(type, shape);
 
                 if (type == typeof(String))
                 {
@@ -476,13 +476,25 @@ IList, ICollection, IEnumerable
             if (typeCode == "b1")
                 return typeof(bool);
             if (typeCode == "i1")
-                return typeof(Byte);
+                return typeof(SByte);
             if (typeCode == "i2")
                 return typeof(Int16);
             if (typeCode == "i4")
                 return typeof(Int32);
             if (typeCode == "i8")
                 return typeof(Int64);
+            if (typeCode == "u1")
+                return typeof(Byte);
+            if (typeCode == "u2")
+                return typeof(UInt16);
+            if (typeCode == "u4")
+                return typeof(UInt32);
+            if (typeCode == "u8")
+                return typeof(UInt64);
+            if (typeCode == "f4")
+                return typeof(Single);
+            if (typeCode == "f8")
+                return typeof(Double);
             if (typeCode.StartsWith("S"))
                 return typeof(String);
 

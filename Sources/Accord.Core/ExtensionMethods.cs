@@ -317,13 +317,13 @@ namespace Accord
             else
             {
                 // The current buffer of decoded characters
-                charBuffer = (char[])GetField(reader, "charBuffer");
+                charBuffer = (char[])GetField(reader, "_charBuffer");
 
                 // The current position in the buffer of decoded characters
-                charPos = (int)GetField(reader, "charPos");
+                charPos = (int)GetField(reader, "_charPos");
 
                 // The number of encoded bytes that are in the current buffer
-                byteLen = (int)GetField(reader, "byteLen");
+                byteLen = (int)GetField(reader, "_byteLen");
             }
 #endif
 
@@ -395,7 +395,24 @@ namespace Accord
             if (type.IsInstanceOfType(value))
                 return value;
 
+#if NETSTANDARD
+            if (type.GetTypeInfo().IsEnum)
+#else
+            if (type.IsEnum)
+#endif
+                return Enum.ToObject(type, (int)System.Convert.ChangeType(value, typeof(int)));
+
             Type inputType = value.GetType();
+
+#if NETSTANDARD
+            if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+#else
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+#endif
+            {
+                MethodInfo setter = type.GetMethod("op_Implicit", new[] { inputType });
+                return setter.Invoke(null, new object[] { value });
+            }
 
             var methods = new List<MethodInfo>();
             methods.AddRange(inputType.GetMethods(BindingFlags.Public | BindingFlags.Static));
@@ -418,6 +435,20 @@ namespace Accord
             //    return System.Convert.ChangeType(value, type);
 
             return System.Convert.ChangeType(value, type);
+        }
+
+        /// <summary>
+        /// Gets the type of the element in a jagged or multi-dimensional matrix.
+        /// </summary>
+        /// 
+        /// <param name="type">The array type whose element type should be computed.</param>
+        /// 
+        public static Type GetInnerMostType(this Type type)
+        {
+            while (type.IsArray)
+                type = type.GetElementType();
+
+            return type;
         }
 
         /// <summary>
@@ -635,6 +666,7 @@ namespace Accord
         }
 #endif
 
+        // TODO: Move this method to a more appropriate location
         internal static WebClient NewWebClient()
         {
             var webClient = new WebClient();
@@ -677,6 +709,79 @@ namespace Accord
                         throw;
                 }
             }
+        }
+
+
+
+        /// <summary>
+        ///  Serializes (converts) a structure to a byte array.
+        /// </summary>
+        /// 
+        /// <param name="value">The structure to be serialized.</param>
+        /// <returns>The byte array containing the serialized structure.</returns>
+        /// 
+        public static byte[] ToByteArray<T>(this T value)
+            where T : struct
+        {
+            int rawsize = Marshal.SizeOf(value);
+            byte[] rawdata = new byte[rawsize];
+            GCHandle handle = GCHandle.Alloc(rawdata, GCHandleType.Pinned);
+            IntPtr buffer = handle.AddrOfPinnedObject();
+            Marshal.StructureToPtr(value, buffer, false);
+            handle.Free();
+            return rawdata;
+        }
+
+        /// <summary>
+        ///   Deserializes (converts) a byte array to a given structure type.
+        /// </summary>
+        /// 
+        /// <remarks>
+        ///  This is a potentiality unsafe operation.
+        /// </remarks>
+        /// 
+        /// <param name="rawData">The byte array containing the serialized object.</param>
+        /// <param name="position">The starting position in the rawData array where the object is located.</param>
+        /// <returns>The object stored in the byte array.</returns>
+        /// 
+        public static T ToStruct<T>(this byte[] rawData, int position = 0)
+            where T : struct
+        {
+            Type type = typeof(T);
+
+#pragma warning disable CS0618 // Type or member is obsolete
+            int rawsize = Marshal.SizeOf(type);
+#pragma warning restore CS0618 // Type or member is obsolete
+
+            if (rawsize > (rawData.Length - position))
+                throw new ArgumentException("The given array is smaller than the object size.");
+
+            IntPtr buffer = Marshal.AllocHGlobal(rawsize);
+            Marshal.Copy(rawData, position, buffer, rawsize);
+#pragma warning disable CS0618 // Type or member is obsolete
+            T obj = (T)Marshal.PtrToStructure(buffer, type);
+#pragma warning restore CS0618 // Type or member is obsolete
+            Marshal.FreeHGlobal(buffer);
+            return obj;
+        }
+
+        /// <summary>
+        ///   Returns a type object representing an array of the current type, with the specified number of dimensions.
+        /// </summary>
+        /// <param name="elementType">Type of the element.</param>
+        /// <param name="rank">The rank.</param>
+        /// <param name="jagged">Whether to return a type for a jagged array of the given rank, or a 
+        /// multdimensional array. Default is false (default is to return multidimensional array types).</param>
+        /// 
+        public static Type MakeArrayType(this Type elementType, int rank, bool jagged)
+        {
+            if (!jagged)
+                return elementType.MakeArrayType(rank);
+
+            if (rank == 0)
+                return elementType;
+
+            return elementType.MakeArrayType(rank: rank - 1, jagged: true).MakeArrayType();
         }
     }
 }

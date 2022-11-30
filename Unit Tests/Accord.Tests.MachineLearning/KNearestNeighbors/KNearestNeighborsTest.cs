@@ -226,7 +226,14 @@ namespace Accord.Tests.MachineLearning
             // two different instances of identical objects.
             #endregion
 
-            Assert.AreEqual(knn.ClassCount , loaded_knn.ClassCount);
+            // Make sure the loaded classifier is still working
+            Assert.AreEqual(2, loaded_knn.Decide(new double[] { 11, 5, 4 }));
+            cm = GeneralConfusionMatrix.Estimate(loaded_knn, inputs, outputs);
+            Assert.AreEqual(0, cm.Error);
+            Assert.AreEqual(1, cm.Accuracy);
+            Assert.AreEqual(1, cm.Kappa);
+
+            Assert.AreEqual(knn.ClassCount, loaded_knn.ClassCount);
             Assert.AreEqual(knn.Distance, loaded_knn.Distance);
             Assert.AreEqual(knn.K, loaded_knn.K);
             Assert.AreEqual(knn.NumberOfClasses, loaded_knn.NumberOfClasses);
@@ -453,6 +460,8 @@ namespace Accord.Tests.MachineLearning
         [Test]
         public void learn_string()
         {
+            string basePath = NUnit.Framework.TestContext.CurrentContext.TestDirectory;
+
             #region doc_learn_text
             // The k-Nearest Neighbors algorithm can be used with
             // any kind of data. In this example, we will see how
@@ -502,97 +511,147 @@ namespace Accord.Tests.MachineLearning
             Assert.AreEqual(0, error);
             Assert.AreEqual(1, acc);
             Assert.AreEqual(1, kappa);
+
+#if !NO_BINARY_SERIALIZATION
+            knn.Save(Path.Combine(basePath, "string_knn.bin"));
+
+            var loaded_knn = Serializer.Load<KNearestNeighbors<string>>(Path.Combine(basePath, "string_knn.bin"));
+
+            Assert.AreEqual(1, loaded_knn.Decide("Chars"));
+            cm = ConfusionMatrix.Estimate(loaded_knn, inputs, outputs);
+            Assert.AreEqual(0, cm.Error);
+            Assert.AreEqual(1, cm.Accuracy);
+            Assert.AreEqual(1, cm.Kappa);
+
+            Assert.AreEqual(knn.ClassCount, loaded_knn.ClassCount);
+            Assert.AreEqual(knn.Distance, loaded_knn.Distance);
+            Assert.AreEqual(knn.K, loaded_knn.K);
+            Assert.AreEqual(knn.NumberOfClasses, loaded_knn.NumberOfClasses);
+            Assert.AreEqual(knn.NumberOfInputs, loaded_knn.NumberOfInputs);
+            Assert.AreEqual(knn.NumberOfOutputs, loaded_knn.NumberOfOutputs);
+            Assert.AreEqual(knn.Outputs, loaded_knn.Outputs);
+            Assert.AreEqual(knn.Token, loaded_knn.Token);
+#endif
         }
 
         [Test]
-        public void KNearestNeighbor_CrossValidation()
+        public void weights_test_1()
         {
-            // Create some sample learning data. In this data,
-            // the first two instances belong to a class, the
-            // four next belong to another class and the last
-            // three to yet another.
+            KNearestNeighbors<string> a;
+            KNearestNeighbors<string> b;
 
-            double[][] inputs =
             {
-                // The first two are from class 0
-                new double[] { -5, -2, -1 },
-                new double[] { -5, -5, -6 },
+                string[] inputs = { "Car", "Bar", "Bar", "Bar", "Jar", "Charm", "Charm", "Chair" };
+                int[] outputs = { 0, 0, 0, 1, 1, 2, 2, 2 };
+                double[] weights = { 1, 1, 0, 0, 1, 1, 0, 1 };
+                var knn = new KNearestNeighbors<string>(k: inputs.Length, distance: new Levenshtein());
+                a = knn.Learn(inputs, outputs, weights);
+            }
 
-                // The next four are from class 1
-                new double[] {  2,  1,  1 },
-                new double[] {  1,  1,  2 },
-                new double[] {  1,  2,  2 },
-                new double[] {  3,  1,  2 },
-
-                // The last three are from class 2
-                new double[] { 11,  5,  4 },
-                new double[] { 15,  5,  6 },
-                new double[] { 10,  5,  6 },
-            };
-
-            int[] outputs =
             {
-                0, 0,        // First two from class 0
-                1, 1, 1, 1,  // Next four from class 1
-                2, 2, 2      // Last three from class 2
-            };
+                string[] inputs = { "Car", "Bar", "Jar", "Charm", "Chair" };
+                int[] outputs = { 0, 0, 1, 2, 2 };
+                var knn = new KNearestNeighbors<string>(k: inputs.Length, distance: new Levenshtein());
+                b = knn.Learn(inputs, outputs);
+            }
 
-
-
-            // Create a new Cross-validation algorithm passing the data set size and the number of folds
-            var crossvalidation = new CrossValidation(size: inputs.Length, folds: 3);
-
-            // Define a fitting function using Support Vector Machines. The objective of this
-            // function is to learn a SVM in the subset of the data indicated by cross-validation.
-
-            crossvalidation.Fitting = delegate (int k, int[] indicesTrain, int[] indicesValidation)
-            {
-                // The fitting function is passing the indices of the original set which
-                // should be considered training data and the indices of the original set
-                // which should be considered validation data.
-
-                // Lets now grab the training data:
-                var trainingInputs = inputs.Submatrix(indicesTrain);
-                var trainingOutputs = outputs.Submatrix(indicesTrain);
-
-                // And now the validation data:
-                var validationInputs = inputs.Submatrix(indicesValidation);
-                var validationOutputs = outputs.Submatrix(indicesValidation);
-
-                // Now we will create the K-Nearest Neighbors algorithm. For this
-                // example, we will be choosing k = 4. This means that, for a given
-                // instance, its nearest 4 neighbors will be used to cast a decision.
-                KNearestNeighbors knn = new KNearestNeighbors(k: 4, classes: 3,
-                    inputs: inputs, outputs: outputs);
-
-
-                // After the algorithm has been created, we can classify instances:
-                int[] train_predicted = trainingInputs.Apply(knn.Compute);
-                int[] test_predicted = validationInputs.Apply(knn.Compute);
-
-                // Compute classification error
-                var cmTrain = new GeneralConfusionMatrix(3, train_predicted, trainingOutputs);
-                double trainingAcc = cmTrain.Accuracy;
-
-                // Now we can compute the validation error on the validation data:
-                var cmTest = new GeneralConfusionMatrix(3, test_predicted, validationOutputs);
-                double validationAcc = cmTest.Accuracy;
-
-                // Return a new information structure containing the model and the errors achieved.
-                return new CrossValidationValues(knn, trainingAcc, validationAcc);
-            };
-
-
-            // Compute the cross-validation
-            var result = crossvalidation.Compute();
-
-            // Finally, access the measured performance.
-            double trainingAccs = result.Training.Mean;
-            double validationAccs = result.Validation.Mean;
-
-
-            Assert.AreEqual(1, trainingAccs);
-            Assert.AreEqual(1, validationAccs);
+            string[] x = new[] { "Car", "Bar", "Jar", "Charm", "Chair" };
+            Assert.AreEqual(a.Scores(x), b.Scores(x));
         }
+
+        [Test]
+        public void weights_test_2()
+        {
+            KNearestNeighbors<string> a;
+            KNearestNeighbors<string> b;
+
+            {
+                string[] inputs = { "Car", "Bar", "Bar", "Bar", "Jar", "Charm", "Charm", "Chair" };
+                int[] outputs = { 0, 0, 0, 1, 1, 2, 2, 2 };
+                var knn = new KNearestNeighbors<string>(k: inputs.Length, distance: new Levenshtein());
+                a = knn.Learn(inputs, outputs);
+            }
+
+            {
+                string[] inputs = { "Car", "Bar", "Bar", "Jar", "Charm", "Chair" };
+                int[] outputs = { 0, 0, 1, 1, 2, 2 };
+                double[] weights = { 1, 2, 1, 1, 2, 1 };
+                var knn = new KNearestNeighbors<string>(k: inputs.Length, distance: new Levenshtein());
+                b = knn.Learn(inputs, outputs, weights);
+            }
+
+            {
+                string x = "Bar";
+                double[] expected = a.Scores(x);
+                double[] actual = b.Scores(x);
+                Assert.AreEqual(expected, actual);
+            }
+            {
+                string[] x = new[] { "Car", "Bar", "Jar", "Charm", "Chair" };
+                double[][] expected = a.Scores(x);
+                double[][] actual = b.Scores(x);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [Test]
+        public void weights_test_tree_1()
+        {
+            KNearestNeighbors a;
+            KNearestNeighbors b;
+
+            {
+                double[][] inputs = Jagged.ColumnVector(4.2, 0.7, 0.7, 0.7, 1.3, 9.4, 9.4, 12);
+                int[] outputs = { 0, 0, 0, 1, 1, 2, 2, 2 };
+                double[] weights = { 1, 1, 0, 0, 1, 1, 0, 1 };
+                var knn = new KNearestNeighbors(k: inputs.Length);
+                a = knn.Learn(inputs, outputs, weights);
+            }
+
+            {
+                double[][] inputs = Jagged.ColumnVector(4.2, 0.7, 1.3, 9.4, 12);
+                int[] outputs = { 0, 0, 1, 2, 2 };
+                var knn = new KNearestNeighbors(k: inputs.Length);
+                b = knn.Learn(inputs, outputs);
+            }
+
+            double[][] x = Jagged.ColumnVector(4.2, 0.7, 1.3, 9.4, 12);
+            Assert.AreEqual(a.Scores(x), b.Scores(x));
+        }
+
+        [Test]
+        public void weights_test_tree_2()
+        {
+            KNearestNeighbors a;
+            KNearestNeighbors b;
+
+            {
+                double[][] inputs = Jagged.ColumnVector(4.2, 0.7, 0.7, 0.7, 1.3, 9.4, 9.4, 12);
+                int[] outputs = { 0, 0, 0, 1, 1, 2, 2, 2 };
+                var knn = new KNearestNeighbors(k: inputs.Length);
+                a = knn.Learn(inputs, outputs);
+            }
+
+            {
+                double[][] inputs = Jagged.ColumnVector(4.2, 0.7, 0.7, 1.3, 9.4, 12);
+                int[] outputs = { 0, 0, 1, 1, 2, 2 };
+                double[] weights = { 1, 2, 1, 1, 2, 1 };
+                var knn = new KNearestNeighbors(k: inputs.Length);
+                b = knn.Learn(inputs, outputs, weights);
+            }
+
+            {
+                double[] x = { 9.4 };
+                double[] expected = a.Scores(x);
+                double[] actual = b.Scores(x);
+                Assert.IsTrue(expected.IsEqual(actual, 1e-4));
+            }
+            {
+                double[][] x = Jagged.ColumnVector(4.2, 0.7, 1.3, 9.4, 12);
+                double[][] expected = a.Scores(x);
+                double[][] actual = b.Scores(x);
+                Assert.IsTrue(expected.IsEqual(actual, 1e-4));
+            }
+        } 
     }
 }

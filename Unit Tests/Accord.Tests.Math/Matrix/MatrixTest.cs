@@ -20,19 +20,21 @@
 //    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using Accord.Math;
+using Accord.Math.Decompositions;
+using AForge;
+using NUnit.Framework;
+using Accord.IO;
+
 namespace Accord.Tests.Math
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using Accord.Math;
-    using Accord.Math.Decompositions;
-    using AForge;
-    using NUnit.Framework;
-    using Accord.IO;
 
     [TestFixture]
+    //[SetCulture("")]
     public partial class MatrixTest
     {
 
@@ -284,6 +286,18 @@ namespace Accord.Tests.Math
         }
 
         [Test]
+        public void IntervalTest_float()
+        {
+            float from = -1;
+            float to = 1;
+            float stepSize = 0.2f;
+            float[] expected = { -1.0f, -0.8f, -0.6f, -0.4f, -0.2f, 0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1.0f };
+            float[] actual = Matrix.Interval(from, to, stepSize);
+            float[] round = Matrix.Round(actual, 3);
+            Assert.IsTrue(Matrix.IsEqual(expected, round));
+        }
+
+        [Test]
         public void IntervalTestInverse()
         {
             double from = 1;
@@ -317,6 +331,17 @@ namespace Accord.Tests.Math
         #endregion
 
         #region Elementwise Operations
+        [Test]
+        public void ElementwiseSubtractTest()
+        {
+            short[] a = { 5, 2, 1 };
+            short[] b = { 3, 1, 2 };
+            short[] expected = { 2, 1, -1 };
+            short[] actual = Elementwise.Subtract(a, b);
+            Assert.IsTrue(Matrix.IsEqual(expected, actual));
+        }
+
+
         [Test]
         public void ElementwiseMultiplyTest()
         {
@@ -863,7 +888,7 @@ namespace Accord.Tests.Math
                 new double[] { 21.00,   0, 0 },
             };
 
-            double[][] actual = table.ToArray();
+            double[][] actual = table.ToJagged();
 
             Assert.IsTrue(expected.IsEqual(actual));
 
@@ -871,7 +896,7 @@ namespace Accord.Tests.Math
             string[] expectedNames = { "Double", "Integer", "Boolean" };
             string[] actualNames;
 
-            table.ToArray(out actualNames);
+            table.ToJagged(out actualNames);
 
             Assert.IsTrue(expectedNames.IsEqual(actualNames));
         }
@@ -963,7 +988,7 @@ namespace Accord.Tests.Math
 
             double[] abs = u.Abs();   // { 1, 6, 3 }
             double[] log = u.Log();   // { 0, 1.79, 1.09 }
-            double[] cos = u.Apply(Math.Cos); // { 0.54, 0.96, -0.989 }
+            double[] cos = u.Apply(System.Math.Cos); // { 0.54, 0.96, -0.989 }
 
             Assert.IsTrue(abs.IsEqual(new double[] { 1, 6, 3 }));
             Assert.IsTrue(log.IsEqual(new double[] { 0, 1.79, 1.09 }, 1e-2));
@@ -1892,7 +1917,7 @@ namespace Accord.Tests.Math
             Assert.AreEqual(expected, det);
 
             det = Matrix.LogDeterminant(m);
-            Assert.AreEqual(Math.Log(expected), det, 1e-10);
+            Assert.AreEqual(System.Math.Log(expected), det, 1e-10);
             Assert.IsFalse(Double.IsNaN(det));
 
             det = Matrix.PseudoDeterminant(m);
@@ -3668,7 +3693,7 @@ namespace Accord.Tests.Math
         public void GetIndicesTest4()
         {
             double[][] v = Jagged.Ones(0, 3);
-            int[][] idx = v.GetIndices().ToArray();
+            int[][] idx = v.GetIndices().ToJagged();
             Assert.AreEqual(idx.Length, 0);
         }
 

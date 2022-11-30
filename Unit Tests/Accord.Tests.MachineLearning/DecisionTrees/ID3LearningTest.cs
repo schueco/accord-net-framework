@@ -78,7 +78,7 @@ namespace Accord.Tests.MachineLearning
 
             // Extract symbols from data and train the classifier
             DataTable symbols = codebook.Apply(data);
-            inputs = symbols.ToArray<int>("Outlook", "Temperature", "Humidity", "Wind");
+            inputs = symbols.ToJagged<int>("Outlook", "Temperature", "Humidity", "Wind");
             outputs = symbols.ToArray<int>("PlayTennis");
 
             double error = id3.Run(inputs, outputs);
@@ -488,7 +488,7 @@ namespace Accord.Tests.MachineLearning
 
             // Extract symbols from data and train the classifier
             DataTable symbols = codebook.Apply(data);
-            inputs = symbols.ToArray<int>("Outlook", "Temperature", "Humidity", "Wind");
+            inputs = symbols.ToJagged<int>("Outlook", "Temperature", "Humidity", "Wind");
             outputs = symbols.ToArray<int>("PlayTennis");
 
             double error = id3.Run(inputs, outputs);
@@ -547,7 +547,7 @@ namespace Accord.Tests.MachineLearning
 
             // Extract symbols from data and train the classifier
             DataTable symbols = codebook.Apply(data);
-            inputs = symbols.ToArray<int>("Outlook", "Temperature", "Humidity", "Wind");
+            inputs = symbols.ToJagged<int>("Outlook", "Temperature", "Humidity", "Wind");
             outputs = symbols.ToArray<int>("PlayTennis");
 
             double error = id3.Run(inputs, outputs);
@@ -595,6 +595,41 @@ namespace Accord.Tests.MachineLearning
             catch (ArgumentNullException) { thrown = true; }
 
             Assert.IsTrue(thrown);
+        }
+
+
+        [Test]
+        public void not_seen_before_test()
+        {
+            // DecisionTree chokes on variable values it has never seen before #689
+            int[][] training =
+            {
+                new [] { 0, 2, 4 },
+                new [] { 1, 5, 2 },
+                new [] { 1, 5, 6 },
+            };
+
+            int[][] testing =
+            {
+                new [] { 99, 2, 4 },
+                new [] { 1, 5, 17 },
+                new [] { 1, 15, 6 },
+            };
+
+            int[] outputs =
+            {
+                1, 1, 0
+            };
+
+            ID3Learning teacher = new ID3Learning();
+
+            DecisionTree tree =  teacher.Learn(training, outputs);
+
+            int[] train = tree.Decide(training);
+            int[] test = tree.Decide(testing);
+
+            Assert.IsTrue(train.IsEqual(new int[] { 1, 1, 0 }));
+            Assert.IsTrue(test.IsEqual(new int[] { 1, 0, 0 }));
         }
 
         [Test]
@@ -846,7 +881,7 @@ namespace Accord.Tests.MachineLearning
 
             // Translate our training data into integer symbols using our codebook:
             DataTable symbols = codebook.Apply(data);
-            int[][] inputs = symbols.ToArray<int>("Outlook", "Temperature", "Humidity", "Wind");
+            int[][] inputs = symbols.ToJagged<int>("Outlook", "Temperature", "Humidity", "Wind");
             int[] outputs = symbols.ToArray<int>("PlayTennis");
 
             // For this task, in which we have only categorical variables, the simplest choice 
