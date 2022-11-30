@@ -41,7 +41,7 @@ namespace Accord.Statistics.Models.Regression
     ///   <code source="Unit Tests\Accord.Tests.Statistics\Models\Regression\MultinomialLogisticRegressionTest.cs" region="doc_learn" />
     ///   
     ///   <para>
-    ///     Additionally, the <see cref="MultinomialLogisticLearning{TMethod}"/> class allows multinomial logistic regression models to be learnt using any 
+    ///     Additionally, the MultinomialLogisticLearning{TMethod} class allows multinomial logistic regression models to be learnt using any 
     ///     mathematical  optimization algorithm that implements the <see cref="IFunctionOptimizationMethod{TInput, TOutput}"/> interface. </para>
     ///   <code source = "Unit Tests\Accord.Tests.Statistics\Models\Regression\MultinomialLogisticGradientDescentTest.cs" region="doc_learn_0" />
     ///   

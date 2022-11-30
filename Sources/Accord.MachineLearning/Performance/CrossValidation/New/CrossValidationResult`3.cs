@@ -104,7 +104,7 @@ namespace Accord.MachineLearning.Performance
         }
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="CrossValidationResult{TModel}"/> class.
+        ///   Initializes a new instance of the CrossValidationResult{TModel} class.
         /// </summary>
         /// 
         /// <param name="models">The models created during the cross-validation runs.</param>
