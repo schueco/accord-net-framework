@@ -5,25 +5,12 @@
   <PropertyGroup>
     <RootNamespace>Accord.Tests.Statistics</RootNamespace>
     <AssemblyName>Accord.Tests.Statistics</AssemblyName>
-    <TargetFrameworks>netcoreapp3.1;net47</TargetFrameworks>
-    <!--
-    <StartupObject>Accord.Tests.Statistics.Program</StartupObject>
-    <OutputType>Exe</OutputType>
-    -->
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
-  <Choose>
-    <When Condition="'$(TargetFramework)' == 'netcoreapp3.1' OR '$(TargetFramework)' == 'netcoreapp1.1'">
-      <ItemGroup>
-        <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="System.ComponentModel.DataAnnotations" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Sources\Accord.DataSets\Accord.DataSets (NETStandard).csproj" />

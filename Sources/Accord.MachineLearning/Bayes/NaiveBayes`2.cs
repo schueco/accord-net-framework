@@ -33,7 +33,6 @@ namespace Accord.MachineLearning.Bayes
     ///   Naïve Bayes Classifier for arbitrary distributions of arbitrary elements.
     /// </summary>
     /// 
-    /// <seealso cref="NaiveBayes"/>
     /// <seealso cref="NaiveBayes{TDistribution}"/>
     /// <seealso cref="NaiveBayesLearning{TDistribution, TInput}"/>
     /// 

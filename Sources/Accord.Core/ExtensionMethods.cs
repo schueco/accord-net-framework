@@ -317,13 +317,13 @@ namespace Accord
             else
             {
                 // The current buffer of decoded characters
-                charBuffer = (char[])GetField(reader, "charBuffer");
+                charBuffer = (char[])GetField(reader, "_charBuffer");
 
                 // The current position in the buffer of decoded characters
-                charPos = (int)GetField(reader, "charPos");
+                charPos = (int)GetField(reader, "_charPos");
 
                 // The number of encoded bytes that are in the current buffer
-                byteLen = (int)GetField(reader, "byteLen");
+                byteLen = (int)GetField(reader, "_byteLen");
             }
 #endif
 

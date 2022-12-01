@@ -38,7 +38,7 @@ namespace Accord.MachineLearning.Bayes
     /// <example>
     /// <para>
     ///   For basic examples on how to learn a Naive Bayes algorithm, please see
-    ///   <see cref="NaiveBayes"/> page. The following examples show how to set
+    ///   NaiveBayes page. The following examples show how to set
     ///   more specialized learning settings for Normal (Gaussian) models.</para>
     ///   
     /// <code source="Unit Tests\Accord.Tests.MachineLearning\Bayes\NaiveBayes`1Test.cs" region="doc_learn" />
@@ -70,7 +70,7 @@ namespace Accord.MachineLearning.Bayes
     /// <example>
     /// <para>
     ///   For basic examples on how to learn a Naive Bayes algorithm, please see
-    ///   <see cref="NaiveBayes"/> page. The following examples show how to set
+    ///   NaiveBayes page. The following examples show how to set
     ///   more specialized learning settings for Normal (Gaussian) models.</para>
     ///   
     /// <code source="Unit Tests\Accord.Tests.MachineLearning\Bayes\NaiveBayes`1Test.cs" region="doc_learn_options" />
@@ -102,7 +102,7 @@ namespace Accord.MachineLearning.Bayes
     /// <example>
     /// <para>
     ///   For basic examples on how to learn a Naive Bayes algorithm, please see
-    ///   <see cref="NaiveBayes"/> page. The following examples show how to set
+    ///   NaiveBayes page. The following examples show how to set
     ///   more specialized learning settings for Normal (Gaussian) models.</para>
     ///   
     /// <code source="Unit Tests\Accord.Tests.MachineLearning\Bayes\NaiveBayes`1Test.cs" region="doc_learn_options" />
