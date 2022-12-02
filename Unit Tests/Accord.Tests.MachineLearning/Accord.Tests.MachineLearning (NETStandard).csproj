@@ -3,18 +3,14 @@
   <PropertyGroup>
     <AssemblyName>Accord.Tests.MachineLearning</AssemblyName>
     <RootNamespace>Accord.Tests.MachineLearning</RootNamespace>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)../Unit Tests/Accord.Tests (NETStandard).targets" />
 
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="System.CodeDom" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+	<PackageReference Include="System.CodeDom" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -134,10 +130,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.7.0" />
-    <PackageReference Update="NUnit" Version="3.12.0" />
-    <PackageReference Update="NUnit.Console" Version="3.11.1" />
-    <PackageReference Update="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.4.0" />
+    <PackageReference Update="NUnit" Version="3.13.3" />
+    <PackageReference Update="NUnit.Console" Version="3.16.0" />
+    <PackageReference Update="NUnit3TestAdapter" Version="4.3.1" />
   </ItemGroup>
 
   <ItemGroup>

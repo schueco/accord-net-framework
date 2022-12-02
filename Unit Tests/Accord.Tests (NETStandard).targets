@@ -56,6 +56,10 @@
     <DefineConstants>NO_CODE_PROVIDER;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+	<DefineConstants>NO_BINARY_SERIALIZATION;NO_WEB;NO_EXCEL;$(DefineConstants)</DefineConstants>
+</PropertyGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
     <DefineConstants>NET35;$(DefineConstants)</DefineConstants>
   </PropertyGroup>

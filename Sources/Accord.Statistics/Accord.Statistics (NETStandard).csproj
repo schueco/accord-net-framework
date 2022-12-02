@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Accord.Statistics</AssemblyName>
     <RootNamespace>Accord.Statistics</RootNamespace>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <NoWarn>NU1803</NoWarn>
   </PropertyGroup>
 
@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

@@ -5,11 +5,11 @@
   <PropertyGroup>
     <RootNamespace>Accord.Tests.Statistics</RootNamespace>
     <AssemblyName>Accord.Tests.Statistics</AssemblyName>
-    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,10 +78,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.7.0" />
-    <PackageReference Update="NUnit" Version="3.12.0" />
-    <PackageReference Update="NUnit.Console" Version="3.11.1" />
-    <PackageReference Update="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.4.0" />
+    <PackageReference Update="NUnit" Version="3.13.3" />
+    <PackageReference Update="NUnit.Console" Version="3.16.0" />
+    <PackageReference Update="NUnit3TestAdapter" Version="4.3.1" />
   </ItemGroup>
 
 </Project>

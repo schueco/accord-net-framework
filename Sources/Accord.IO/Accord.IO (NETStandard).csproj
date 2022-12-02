@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Accord.IO</AssemblyName>
     <RootNamespace>Accord.IO</RootNamespace>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <NoWarn>NU1803</NoWarn>
   </PropertyGroup>
 
@@ -12,10 +12,6 @@
   <ItemGroup>
     <Compile Remove="Extensions.Matrix.cs" />
     <Compile Remove="Extensions.Table.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="SharpZipLib" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>

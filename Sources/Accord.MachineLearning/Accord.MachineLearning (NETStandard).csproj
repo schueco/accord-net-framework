@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Accord.MachineLearning</AssemblyName>
     <RootNamespace>Accord.MachineLearning</RootNamespace>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <NoWarn>NU1803</NoWarn>
   </PropertyGroup>
 
@@ -18,10 +18,6 @@
     <ProjectReference Include="..\Accord.Math.Core\Accord.Math.Core (NETStandard).csproj" />
     <ProjectReference Include="..\Accord.Math\Accord.Math (NETStandard).csproj" />
     <ProjectReference Include="..\Accord.Statistics\Accord.Statistics (NETStandard).csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.4'">
-    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
