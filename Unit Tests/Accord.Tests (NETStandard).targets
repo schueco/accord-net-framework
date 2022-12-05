@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <RuntimeIdentifiers>win7-x64;ubuntu.16.10-x64</RuntimeIdentifiers>
+    <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <Configurations>Debug;Release</Configurations>
@@ -18,67 +18,12 @@
     <PackageReference Include="NUnit.Console" Version="3.6.1" />
   </ItemGroup>
 
-  <!--
-  <Target Name="SpicNSpan"  AfterTargets="Clean">
-    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
-    <RemoveDir Directories="$(BaseOutputPath)" />
-  </Target>
-  -->
-
-  <!--<PropertyGroup Condition="'$(Configuration)'=='Debug'">
-    <DefineConstants>DEBUG</DefineConstants>
-    --><!--<DebugType>full</DebugType>--><!--
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>-->
-
-  <!--<PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp1.1'">
-    <DefineConstants>NETCORE1_1;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
-    <DefineConstants>NETCORE2_0;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>-->
-  
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'
-                         OR '$(TargetFramework)'=='netcoreapp1.1'">
-    <DefineConstants>NETCORE;NO_CODE_PROVIDER;NO_EXCEL;NO_BITMAP;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp1.1'">
+  <!-- <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp1.1'">
     <DefineConstants>NO_EXPRESSIONS;NO_BINARY_SERIALIZATION;NO_DATA_TABLE;NO_DEFAULT_ENCODING;NO_CULTURE;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
-    <DefineConstants>NO_EXCEL;NO_BINARY_SERIALIZATION;NO_CODE_PROVIDER;NETCORE;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
-    <DefineConstants>NO_CODE_PROVIDER;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
+  </PropertyGroup> -->
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
-	<DefineConstants>NO_BINARY_SERIALIZATION;NO_WEB;NO_EXCEL;$(DefineConstants)</DefineConstants>
-</PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
-    <DefineConstants>NET35;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
-    <DefineConstants>NET40;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
-    <DefineConstants>NET45;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net46'">
-    <DefineConstants>NET46;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net462'">
-    <DefineConstants>NET46;NET462;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'!='netcoreapp1.1' 
-                        AND '$(TargetFramework)'!='netcoreapp2.0'">
-    <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
+	  <DefineConstants>NO_BINARY_SERIALIZATION;NO_WEB;NO_EXCEL;NO_CODE_PROVIDER;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
