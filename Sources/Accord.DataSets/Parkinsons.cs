@@ -22,10 +22,6 @@
 
 namespace Accord.DataSets
 {
-    using Accord.DataSets.Base;
-    using Accord.Math;
-    using System;
-
     /// <summary>
     ///   Oxford Parkinson's Disease Detection Dataset.
     /// </summary>

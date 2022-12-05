@@ -708,6 +708,7 @@ namespace Accord.Statistics.Analysis
             min = max = 0;
         }
 
+#if !NO_BINARY_SERIALIZATION
 
         /// <summary>
         ///   Saves the curve to a stream.
@@ -751,6 +752,7 @@ namespace Accord.Statistics.Analysis
             }
         }
 
+
         /// <summary>
         ///   Saves the curve to a stream.
         /// </summary>
@@ -764,6 +766,7 @@ namespace Accord.Statistics.Analysis
                 Save(fs);
             }
         }
+#endif
     }
 
 

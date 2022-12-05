@@ -42,7 +42,7 @@ namespace Accord.MachineLearning.VectorMachines
     /// 
     [Serializable]
     [Obsolete("Please use MultilabelSupportVectorMachine<TKernel> instead.")]
-#if !NETSTANDARD1_4
+#if !NET6_0_OR_GREATER
     [SerializationBinder(typeof(MultilabelSupportVectorMachine.MultilabelSupportVectorMachineBinder))]
 #endif
     public class MultilabelSupportVectorMachine :
@@ -94,7 +94,7 @@ namespace Accord.MachineLearning.VectorMachines
 
 
         #region Obsolete
-#if !NETSTANDARD1_4
+#if !NET6_0_OR_GREATER
         /// <summary>
         ///   Gets the classifier for class <paramref name="index"/>.
         /// </summary>
@@ -104,6 +104,9 @@ namespace Accord.MachineLearning.VectorMachines
         {
             get { return Models[index] as KernelSupportVectorMachine; }
         }
+#endif
+
+#if !NO_BINARY_SERIALIZATION
 
         /// <summary>
         ///   Saves the machine to a stream.
@@ -247,7 +250,7 @@ namespace Accord.MachineLearning.VectorMachines
 
 
         #region Serialization backwards compatibility
-#if !NETSTANDARD1_4
+#if !NET6_0_OR_GREATER
         internal class MultilabelSupportVectorMachineBinder : SerializationBinder
         {
 

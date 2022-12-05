@@ -245,11 +245,7 @@ namespace Accord.Tests.MachineLearning
             Assert.AreEqual(newPrediction[0], true);
         }
 
-#if !NETSTANDARD2_0
-        [Test]
-#if DEBUG
-        [Ignore("Intensive")]
-#endif
+#if !NO_WEB
         public void learn_gaussian_sparse_kernel2()
         {
             string tmp = Path.Combine(TestContext.CurrentContext.WorkDirectory, "tmp");

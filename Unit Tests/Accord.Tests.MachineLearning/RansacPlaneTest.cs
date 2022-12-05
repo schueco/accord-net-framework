@@ -114,7 +114,7 @@ namespace Accord.Tests.MachineLearning
             }
         }
 
-#if !NETCORE
+#if !NET6_0_OR_GREATER
         [Test, Category("Random")]
         public void RansacPlaneConstructorTest2()
         {

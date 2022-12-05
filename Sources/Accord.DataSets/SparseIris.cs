@@ -20,11 +20,11 @@
 //    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
+#if !NO_WEB
+
 namespace Accord.DataSets
 {
-    using Accord.DataSets.Base;
     using Accord.Math;
-    using System;
 
     /// <summary>
     ///   Fisher's Iris flower data set.
@@ -98,3 +98,4 @@ namespace Accord.DataSets
 
     }
 }
+#endif

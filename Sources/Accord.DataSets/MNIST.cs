@@ -20,12 +20,12 @@
 //    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
+#if !NO_WEB
+
 namespace Accord.DataSets
 {
-    using Accord.DataSets.Base;
     using Accord.Math;
     using System;
-    using Accord.Compat;
 
     /// <summary>
     ///   MNIST Dataset of handwritten digits.
@@ -101,3 +101,4 @@ namespace Accord.DataSets
         
     }
 }
+#endif

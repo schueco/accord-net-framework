@@ -22,10 +22,6 @@
 
 namespace Accord.DataSets
 {
-    using Accord.DataSets.Base;
-    using Accord.Math;
-    using System;
-
     /// <summary>
     ///   Fisher's Iris flower data set.
     /// </summary>
@@ -68,8 +64,10 @@ namespace Accord.DataSets
     ///   <code source="Unit Tests\Accord.Tests.MachineLearning\VectorMachines\AveragedStochasticGradientDescentTest.cs" region="doc_learn_multiclass" />
     /// </example>
     /// 
+#if !NO_WEB
     /// <seealso cref="Accord.DataSets.SparseIris" />
     /// 
+#endif
     public class Iris
     {
         /// <summary>
