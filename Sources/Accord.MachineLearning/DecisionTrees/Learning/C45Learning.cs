@@ -156,6 +156,13 @@ namespace Accord.MachineLearning.DecisionTrees.Learning
         }
 
         /// <summary>
+        ///   Toggles the generation of outputs on decision trees with leafs.
+        ///   See https://github.com/accord-net/framework/issues/1659
+        /// </summary>
+        ///
+        public bool ProduceOutputOnDecisionTreeWithLeafs { get; set; } = false;
+
+        /// <summary>
         ///   Creates a new C4.5 learning algorithm.
         /// </summary>
         /// 
@@ -437,7 +444,7 @@ namespace Accord.MachineLearning.DecisionTrees.Learning
                     outputSubset = outputs.Get(maxGainPartition[i]);
                     weightSubset = weights.Get(maxGainPartition[i]);
 
-                    if (outputSubset.Length == 0)
+                    if (ProduceOutputOnDecisionTreeWithLeafs && outputSubset.Length == 0)
                     {
                         //in this case the we have no samples for this category
                         //but we still want to be able to make a decision, so we will give the best of the current node as output
