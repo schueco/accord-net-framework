@@ -48,14 +48,38 @@ pipeline
                 }
             }
         }     
-        stage('Build framework')
+        stage('Build net5.0')
         {
             steps
             {
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    dotnet build --no-restore --output Release --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    dotnet build --no-restore --framework net5.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    """
+                }
+            }
+        }
+        stage('Build net6.0')
+        {
+            steps
+            {
+                dir("${env.WORKSPACE}\\Sources")
+                {
+                    bat """
+                    dotnet build --no-restore --framework net6.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    """
+                }
+            }
+        }
+        stage('Tests')
+        {
+            steps
+            {
+                dir("${env.WORKSPACE}\\Sources")
+                {
+                    bat """
+                    dotnet test --no-build --logger trx --results-directory test_results --configuration Release --framework net6.0 /p:Platform="Any CPU"
                     """
                 }
             }
