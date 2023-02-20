@@ -497,7 +497,7 @@ namespace Accord.MachineLearning.DecisionTrees
         }
 #endif
 
-#if !NET6_0_OR_GREATER
+#if !NET5_0_OR_GREATER
         /// <summary>
         ///   Creates a .NET assembly (.dll) containing a static class of
         ///   the given name implementing the decision tree. The class will

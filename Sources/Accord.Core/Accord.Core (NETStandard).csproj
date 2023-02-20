@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Accord</AssemblyName>
     <RootNamespace>Accord</RootNamespace>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <NoWarn>NU1803</NoWarn>
   </PropertyGroup>
 

@@ -38,7 +38,7 @@ namespace Accord.MachineLearning.VectorMachines
     /// 
     [Serializable]
     [Obsolete("Please use MulticlassSupportVectorMachine<TKernel> instead.")]
-#if !NET6_0_OR_GREATER
+#if !NET5_0_OR_GREATER
     [SerializationBinder(typeof(MulticlassSupportVectorMachine.MulticlassSupportVectorMachineBinder))]
 #endif
     public class MulticlassSupportVectorMachine :
@@ -422,7 +422,7 @@ namespace Accord.MachineLearning.VectorMachines
 
 
         #region Serialization backwards compatibility
-#if !NET6_0_OR_GREATER
+#if !NET5_0_OR_GREATER
         internal class MulticlassSupportVectorMachineBinder : SerializationBinder
         {
 

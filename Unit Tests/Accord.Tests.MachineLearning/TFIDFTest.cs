@@ -121,7 +121,7 @@ namespace Accord.Tests.MachineLearning
             Assert.IsTrue(c2);
         }
 
-#if !NET6_0_OR_GREATER
+#if !NET5_0_OR_GREATER
         [Test]
         [Ignore("This test can only be executed in x64")]
         public void learn_test1()

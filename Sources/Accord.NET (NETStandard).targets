@@ -42,6 +42,10 @@
 	  <DefineConstants>NO_BINARY_SERIALIZATION;NO_WEB;NO_EXCEL;NO_CODE_PROVIDER;$(DefineConstants)</DefineConstants>	
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'">
+	<DefineConstants>NO_BINARY_SERIALIZATION;NO_WEB;NO_EXCEL;NO_CODE_PROVIDER;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
   <!-- Copy binaries, debug and all other generated files into the /Release or /Debug folders at the project's root -->
   <ItemGroup>
     <OutputFiles Include="$(ProjectDir)bin\$(Configuration)\$(TargetFramework)\**\*.*" />

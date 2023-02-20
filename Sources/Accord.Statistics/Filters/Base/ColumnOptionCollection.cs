@@ -84,7 +84,7 @@ namespace Accord.Statistics.Filters
             return options;
         }
 
-#if !NET6_0_OR_GREATER
+#if !NET5_0_OR_GREATER
         /// <summary>
         ///   Gets the associated options for the given column name.
         /// </summary>
