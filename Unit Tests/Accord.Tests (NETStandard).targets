@@ -18,12 +18,12 @@
     <PackageReference Include="NUnit.Console" Version="3.6.1" />
   </ItemGroup>
 
-  <!-- <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp1.1'">
-    <DefineConstants>NO_EXPRESSIONS;NO_BINARY_SERIALIZATION;NO_DATA_TABLE;NO_DEFAULT_ENCODING;NO_CULTURE;$(DefineConstants)</DefineConstants>
-  </PropertyGroup> -->
-
   <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
 	  <DefineConstants>NO_BINARY_SERIALIZATION;NO_WEB;NO_EXCEL;NO_CODE_PROVIDER;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'">
+	<DefineConstants>NO_BINARY_SERIALIZATION;NO_WEB;NO_EXCEL;NO_CODE_PROVIDER;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
