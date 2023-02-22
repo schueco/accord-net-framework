@@ -36,6 +36,21 @@ pipeline
                 }
             }
         }
+        stage('Calculate NuGET version')
+        {
+            steps
+            {
+                dir("${env.WORKSPACE}")
+                {
+                    script
+                    {
+                        env.NUGET_VERSION = bat(returnStdout:true,
+                                                    script: "@python.exe calculateNuGETVersion.py ${BRANCH_NAME} $P4_CHANGELIST"
+                                                )
+                    }
+                }
+            }
+        }
         stage('NuGet restore')
         {
             steps
@@ -93,12 +108,10 @@ pipeline
                    script
                    {
                         files = findFiles( glob: '*.nuspec' )
-                        version = powershell(returnStdout: true, script: "Get-Content ${env.WORKSPACE}\\Version.txt").trim()
-
                         files.each
                         {
                             f ->
-                                bat script: "nuget pack ${f.path} -Version ${version}"
+                                bat script: "nuget pack ${f.path} -Version ${env.NUGET_VERSION}"
                         }
 
                         jfrogCliUpload(JFROG: 'jf', FILE: '*.nupkg', TARGET: "nuget-local/Accord.NET/${version}/", ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER, FLAT: true)
