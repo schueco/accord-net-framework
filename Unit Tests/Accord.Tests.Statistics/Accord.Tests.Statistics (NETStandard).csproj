@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Sources\Accord.DataSets\Accord.DataSets (NETStandard).csproj" />
     <ProjectReference Include="..\..\Sources\Accord.IO\Accord.IO (NETStandard).csproj" />
     <ProjectReference Include="..\..\Sources\Accord.Statistics\Accord.Statistics (NETStandard).csproj" />

@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Accord.Statistics\Accord.Statistics (NETStandard).csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-  </ItemGroup>
-
 </Project>
