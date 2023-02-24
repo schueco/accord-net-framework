@@ -41,7 +41,7 @@ namespace Accord
     using System.Net;
     using System.Threading;
     using System.Threading.Tasks;
-
+    
     /// <summary>
     ///   Static class for utility extension methods.
     /// </summary>
@@ -341,7 +341,8 @@ namespace Accord
                 BindingFlags.DeclaredOnly | BindingFlags.NonPublic | BindingFlags.Instance |
                 BindingFlags.GetField, null, reader, null, CultureInfo.InvariantCulture);
         }
-
+#endif
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Deserializes the specified stream into an object graph, but locates
         ///   types by searching all loaded assemblies and ignoring their versions.
@@ -666,6 +667,7 @@ namespace Accord
         }
 #endif
 
+#if !NO_WEB
         // TODO: Move this method to a more appropriate location
         internal static WebClient NewWebClient()
         {
@@ -673,6 +675,7 @@ namespace Accord
             webClient.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) (Accord.NET Framework)");
             return webClient;
         }
+#endif
 
         /// <summary>
         ///   Attempts to download a file from the web multiple times before giving up.

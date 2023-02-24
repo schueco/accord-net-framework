@@ -495,8 +495,9 @@ namespace Accord.MachineLearning.DecisionTrees
         {
             return new DecisionTreeExpressionCreator(this).Create();
         }
+#endif
 
-#if !(NETSTANDARD2_0 || NETSTANDARD2_1)
+#if !NET5_0_OR_GREATER
         /// <summary>
         ///   Creates a .NET assembly (.dll) containing a static class of
         ///   the given name implementing the decision tree. The class will
@@ -537,7 +538,6 @@ namespace Accord.MachineLearning.DecisionTrees
             dt.CreateType();
             da.Save(assemblyName);
         }
-#endif
 #endif
 
 
@@ -606,7 +606,7 @@ namespace Accord.MachineLearning.DecisionTrees
 
 
         #region Obsolete
-#if !NETSTANDARD1_4
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Obsolete. Please use <see cref="Accord.IO.Serializer.Save{T}(T, string)"/> (or use it as an extension method).
         /// </summary>

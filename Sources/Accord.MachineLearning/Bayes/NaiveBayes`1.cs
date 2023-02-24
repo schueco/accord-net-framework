@@ -349,7 +349,7 @@ namespace Accord.MachineLearning.Bayes
             responses = Special.Softmax(ll);
             return imax;
         }
-#if !NETSTANDARD1_4
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Saves the Naïve Bayes model to a stream.
         /// </summary>

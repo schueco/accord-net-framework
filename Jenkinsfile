@@ -36,6 +36,21 @@ pipeline
                 }
             }
         }
+        stage('Calculate NuGET version')
+        {
+            steps
+            {
+                dir("${env.WORKSPACE}")
+                {
+                    script
+                    {
+                        env.NUGET_VERSION = bat(returnStdout:true,
+                                                    script: "@python.exe calculateNuGETVersion.py ${BRANCH_NAME} $P4_CHANGELIST"
+                                                )
+                    }
+                }
+            }
+        }
         stage('NuGet restore')
         {
             steps
@@ -48,14 +63,38 @@ pipeline
                 }
             }
         }     
-        stage('Build framework')
+        stage('Build net5.0')
         {
             steps
             {
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    dotnet build --no-restore --output Release --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    dotnet build --no-restore --framework net5.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    """
+                }
+            }
+        }
+        stage('Build net6.0')
+        {
+            steps
+            {
+                dir("${env.WORKSPACE}\\Sources")
+                {
+                    bat """
+                    dotnet build --no-restore --framework net6.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    """
+                }
+            }
+        }
+        stage('Tests')
+        {
+            steps
+            {
+                dir("${env.WORKSPACE}\\Sources")
+                {
+                    bat """
+                    dotnet test --no-build --logger trx --results-directory test_results --configuration Release --framework net6.0 /p:Platform="Any CPU"
                     """
                 }
             }
@@ -69,15 +108,13 @@ pipeline
                    script
                    {
                         files = findFiles( glob: '*.nuspec' )
-                        version = powershell(returnStdout: true, script: "Get-Content ${env.WORKSPACE}\\Version.txt").trim()
-
                         files.each
                         {
                             f ->
-                                bat script: "nuget pack ${f.path} -Version ${version}"
+                                bat script: "nuget pack ${f.path} -Version ${env.NUGET_VERSION}"
                         }
 
-                        jfrogCliUpload(JFROG: 'jf', FILE: '*.nupkg', TARGET: "nuget-local/Accord.NET/${version}/", ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER, FLAT: true)
+                        jfrogCliUpload(JFROG: 'jf', FILE: '*.nupkg', TARGET: "nuget-local/Accord.NET/${NUGET_VERSION}/", ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER, FLAT: true)
                         jfrogCliCollectEnvVar(JFROG: 'jf', ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER)
                         jfrogCliPublishInfo(JFROG: 'jf', ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER)
                     }

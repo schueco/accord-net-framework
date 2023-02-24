@@ -3,8 +3,9 @@
   <PropertyGroup>
     <AssemblyName>Accord.Math</AssemblyName>
     <RootNamespace>Accord.Math</RootNamespace>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <NoWarn>NU1803</NoWarn>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
@@ -13,28 +14,6 @@
     <ProjectReference Include="..\Accord.Core\Accord.Core (NETStandard).csproj" />
     <ProjectReference Include="..\Accord.Math.Core\Accord.Math.Core (NETStandard).csproj" />
   </ItemGroup>
-
-  <Choose>
-    <When Condition="'$(TargetFramework)' == 'netstandard1.4'">
-      <ItemGroup>
-        <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
-        <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
-      </ItemGroup>
-    </When>
-    <When Condition="'$(TargetFramework)' == 'netstandard2.1'">
-      <ItemGroup>
-        <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
-        <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
-      </ItemGroup>
-    </When>
-    <When Condition="'$(TargetFramework)' == 'net35' OR '$(TargetFramework)' == 'net40'">
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="System.IO.Compression" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
 
   <ItemGroup>
     <None Update="Decompositions\CholeskyDecomposition.tt">

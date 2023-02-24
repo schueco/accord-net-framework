@@ -100,7 +100,7 @@ namespace Accord.Tests.MachineLearning
             Assert.IsTrue(error < 0.015);
         }
 
-#if !NO_DATA_TABLE
+#if !NO_WEB
         [Test]
         public void LargeRunTest()
         {

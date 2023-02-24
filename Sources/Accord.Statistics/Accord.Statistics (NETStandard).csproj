@@ -3,8 +3,9 @@
   <PropertyGroup>
     <AssemblyName>Accord.Statistics</AssemblyName>
     <RootNamespace>Accord.Statistics</RootNamespace>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <NoWarn>NU1803</NoWarn>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
@@ -13,10 +14,6 @@
     <ProjectReference Include="..\Accord.Core\Accord.Core (NETStandard).csproj" />
     <ProjectReference Include="..\Accord.Math.Core\Accord.Math.Core (NETStandard).csproj" />
     <ProjectReference Include="..\Accord.Math\Accord.Math (NETStandard).csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
 
 </Project>

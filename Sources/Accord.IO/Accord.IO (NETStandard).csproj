@@ -3,8 +3,9 @@
   <PropertyGroup>
     <AssemblyName>Accord.IO</AssemblyName>
     <RootNamespace>Accord.IO</RootNamespace>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <NoWarn>NU1803</NoWarn>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
@@ -12,10 +13,6 @@
   <ItemGroup>
     <Compile Remove="Extensions.Matrix.cs" />
     <Compile Remove="Extensions.Table.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="SharpZipLib" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>

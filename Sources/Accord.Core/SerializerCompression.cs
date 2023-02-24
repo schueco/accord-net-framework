@@ -22,7 +22,7 @@
 
 namespace Accord.IO
 {
-#if NETSTANDARD
+#if NET5_0_OR_GREATER
     /// <summary>
     ///   Compression algorithms.
     /// </summary>

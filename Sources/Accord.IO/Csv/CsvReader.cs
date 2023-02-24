@@ -254,6 +254,7 @@ namespace Accord.IO
             DefaultParseErrorAction = ParseErrorAction.RaiseEvent;
         }
 
+#if !NO_WEB
         /// <summary>
         ///   Creates a new CsvReader to read from a Web URL.
         /// </summary>
@@ -269,6 +270,7 @@ namespace Accord.IO
             MemoryStream stream = new MemoryStream(bytes);
             return new CsvReader(stream, hasHeaders);
         }
+#endif
 
         /// <summary>
         ///   Creates a new CsvReader to read from a string.
@@ -2064,11 +2066,8 @@ namespace Accord.IO
         /// </remarks>
         public void Dispose()
         {
-            if (!_isDisposed)
-            {
-                Dispose(true);
-                GC.SuppressFinalize(this);
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -2146,10 +2145,6 @@ namespace Accord.IO
         /// </summary>
         ~CsvReader()
         {
-#if DEBUG
-            Debug.WriteLine("FinalizableObject was not disposed" + _allocStack.ToString());
-#endif
-
             Dispose(false);
         }
 #endif

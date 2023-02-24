@@ -22,7 +22,7 @@
 
 namespace Accord.IO
 {
-#if !NETSTANDARD
+#if !NO_EXCEL
     using System;
     using System.Collections.Generic;
     using System.Data;

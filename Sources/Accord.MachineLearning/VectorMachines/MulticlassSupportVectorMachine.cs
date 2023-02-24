@@ -38,7 +38,7 @@ namespace Accord.MachineLearning.VectorMachines
     /// 
     [Serializable]
     [Obsolete("Please use MulticlassSupportVectorMachine<TKernel> instead.")]
-#if !NETSTANDARD
+#if !NET5_0_OR_GREATER
     [SerializationBinder(typeof(MulticlassSupportVectorMachine.MulticlassSupportVectorMachineBinder))]
 #endif
     public class MulticlassSupportVectorMachine :
@@ -365,7 +365,7 @@ namespace Accord.MachineLearning.VectorMachines
             get { return Models[0][0].IsProbabilistic; }
         }
 
-#if !NETSTANDARD1_4
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Saves the machine to a stream.
         /// </summary>
@@ -422,7 +422,7 @@ namespace Accord.MachineLearning.VectorMachines
 
 
         #region Serialization backwards compatibility
-#if !NETSTANDARD
+#if !NET5_0_OR_GREATER
         internal class MulticlassSupportVectorMachineBinder : SerializationBinder
         {
 

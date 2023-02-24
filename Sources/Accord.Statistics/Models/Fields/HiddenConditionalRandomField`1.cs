@@ -481,7 +481,7 @@ namespace Accord.Statistics.Models.Fields
             return logLikelihoods;
         }
 
-#if !NETSTANDARD1_4
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Saves the random field to a stream.
         /// </summary>

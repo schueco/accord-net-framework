@@ -793,6 +793,8 @@ namespace Accord.Tests.Statistics
             }
         }
 
+#if !NO_WEB
+
         [Test, Category("Intensive")]
         [Ignore("Random")] // reproducible parallelization of this test requires #870
         public void learn_pendigits()
@@ -841,6 +843,10 @@ namespace Accord.Tests.Statistics
             }
         }
 
+#endif
+
+#if !NO_WEB
+
         [Test, Category("Intensive")]
         [Ignore("Random")] // reproducible parallelization of this test requires #870
         public void learn_pendigits_normalization()
@@ -848,7 +854,7 @@ namespace Accord.Tests.Statistics
             Console.WriteLine("Starting HiddenMarkovClassifier`2Test.learn_pendigits_normalization");
             string localDownloadPath = Path.Combine(NUnit.Framework.TestContext.CurrentContext.TestDirectory, "pendigits5");
 
-            #region doc_learn_pendigits
+#region doc_learn_pendigits
             // Ensure we get reproducible results
             Accord.Math.Random.Generator.Seed = 0;
 
@@ -918,7 +924,7 @@ namespace Accord.Tests.Statistics
             // Check the performance of the classifier by comparing with the ground-truth:
             var m2 = new GeneralConfusionMatrix(predicted: testPredicted, expected: testOutputs);
             double testAcc = m2.Accuracy; // should be 0.8130504403522818
-            #endregion
+#endregion
 
 #if NET35
             Assert.AreEqual(0.89594053744997137d, trainAcc, 1.5e-2);
@@ -928,7 +934,7 @@ namespace Accord.Tests.Statistics
             Assert.AreEqual(0.8130504403522818, testAcc, 1.5e-2);
 #endif
         }
-
+#endif
 
         int[] large_outputs = { 0, 0, 0, 0, 1, 1, 1 };
 

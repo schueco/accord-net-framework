@@ -22,10 +22,6 @@
 
 namespace Accord.DataSets
 {
-    using Accord.DataSets.Base;
-    using Accord.Math;
-    using System;
-
     /// <summary>
     ///   University of Wisconsin's (Original) Breast Cancer data set.
     /// </summary>

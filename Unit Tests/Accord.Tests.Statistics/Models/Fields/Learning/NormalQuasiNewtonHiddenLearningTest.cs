@@ -96,6 +96,8 @@ namespace Accord.Tests.Statistics.Models.Fields
             Assert.IsTrue(ll1 > ll0);
         }
 
+#if !NO_WEB
+
         [Test, Category("Intensive")]
         [Ignore("Intensive")] // reproducible parallelization of this test requires #870
         public void learn_pendigits_normalization()
@@ -105,7 +107,7 @@ namespace Accord.Tests.Statistics.Models.Fields
 
             using (var travis = new KeepTravisAlive())
             {
-                #region doc_learn_pendigits
+#region doc_learn_pendigits
                 // Ensure we get reproducible results
                 Accord.Math.Random.Generator.Seed = 0;
 
@@ -192,11 +194,12 @@ namespace Accord.Tests.Statistics.Models.Fields
                 // Check the performance of the classifier by comparing with the ground-truth:
                 var m2 = new GeneralConfusionMatrix(predicted: testPredicted, expected: testOutputs);
                 double testAcc = m2.Accuracy; // should be 0.66506538564184681
-                #endregion
+#endregion
 
                 Assert.AreEqual(0.66523727844482561, trainAcc, 1e-10);
                 Assert.AreEqual(0.66506538564184681, testAcc, 1e-10);
             }
         }
+#endif
     }
 }

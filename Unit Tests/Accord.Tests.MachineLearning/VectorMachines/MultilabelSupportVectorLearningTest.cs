@@ -579,7 +579,7 @@ namespace Accord.Tests.MachineLearning
             Assert.IsTrue(predicted.ArgMax(dimension: 1).IsEqual(outputs));
         }
 
-
+#if !NO_WEB
         [Test]
         public void multilabel_linear_mnist()
         {
@@ -627,6 +627,7 @@ namespace Accord.Tests.MachineLearning
             Assert.AreEqual(0.084016666666666628, trainError, 1e-4);
             Assert.AreEqual(0.084899999999999975, testError, 1e-3);
         }
+#endif
 
         [Test]
         public void multilabel_gaussian_new_usage()
