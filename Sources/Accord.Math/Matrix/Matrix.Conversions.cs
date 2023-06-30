@@ -1118,14 +1118,14 @@ namespace Accord.Math
             T[][] m = new T[table.Rows.Count][];
 
             for (int i = 0; i < table.Rows.Count; i++)
-                m[i] = new T[columnNames.Length];
-
-            for (int j = 0; j < columnNames.Length; j++)
             {
-                DataColumn col = table.Columns[columnNames[j]];
-
-                for (int i = 0; i < table.Rows.Count; i++)
-                    m[i][j] = (T)System.Convert.ChangeType(table.Rows[i][col], typeof(T));
+                m[i] = new T[columnNames.Length];
+                var row = table.Rows[i];
+                
+                for (int j = 0; j < columnNames.Length; j++)
+                {
+                    m[i][j] = (T)System.Convert.ChangeType(row[columnNames[j]], typeof(T));
+                }
             }
 
             return m;
