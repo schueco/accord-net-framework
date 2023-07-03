@@ -390,7 +390,7 @@ namespace Accord.Math
         /// </summary>
         /// 
         [Obsolete("Please use Vector.Scale instead.")]
-        public static float[] Scale(Range from, Range to, float[] x)
+        public static float[] Scale(Accord.Range from, Accord.Range to, float[] x)
         {
             return Accord.Math.Vector.Scale(x, (IRange<float>)from, (IRange<float>)to);
         }

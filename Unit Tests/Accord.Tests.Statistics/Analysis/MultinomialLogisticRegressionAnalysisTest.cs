@@ -142,12 +142,12 @@ namespace Accord.Tests.Statistics
 
             Assert.IsTrue(expectedCoef.IsEqual(coef, 1e-3));
         }
-
+#if !NO_WEB
         [Test]
         public void learn_test()
         {
             // http://www.ats.ucla.edu/stat/stata/dae/mlogit.htm
-            #region doc_learn_1
+        #region doc_learn_1
             // This example downloads an example dataset from the web and learns a multinomial logistic 
             // regression on it. However, please keep in mind that the Multinomial Logistic Regression 
             // can also work without many of the elements that will be shown below, like the codebook, 
@@ -239,7 +239,7 @@ namespace Accord.Tests.Statistics
 
             double acc = cm.Accuracy; // should be 0.61
             double kappa = cm.Kappa;  // should be 0.2993487536492252
-            #endregion
+        #endregion
 
 
             Assert.AreEqual(9, coefficients);
@@ -256,6 +256,7 @@ namespace Accord.Tests.Statistics
 
             testmlr(analysis);
         }
+#endif
 #endif
 
         [Test]

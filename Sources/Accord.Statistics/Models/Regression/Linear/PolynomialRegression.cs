@@ -296,6 +296,7 @@ namespace Accord.Statistics.Models.Regression.Linear
         public string ToString(string format, IFormatProvider formatProvider)
         {
             StringBuilder sb = new StringBuilder();
+            const int digits = 14;
 
             sb.Append("y(x) = ");
             for (int i = 0; i < regression.Weights.Length; i++)
@@ -304,7 +305,7 @@ namespace Accord.Statistics.Models.Regression.Linear
                 double coeff = regression.Weights[i];
 
                 string coefStr = format == null ?
-                    coeff.ToString(formatProvider) :
+                    Math.Round(coeff, digits).ToString(formatProvider) :
                     coeff.ToString(format, formatProvider);
 
                 sb.AppendFormat(formatProvider, "{0}x^{1}", coefStr, degree);
@@ -314,7 +315,7 @@ namespace Accord.Statistics.Models.Regression.Linear
             }
 
             string interceptStr = format == null ?
-                    Intercept.ToString(formatProvider) :
+                    Math.Round(Intercept, digits).ToString(formatProvider) :
                     Intercept.ToString(format, formatProvider);
 
             sb.AppendFormat(formatProvider, " + {0}", interceptStr);

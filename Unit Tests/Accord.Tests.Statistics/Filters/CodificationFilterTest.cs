@@ -161,6 +161,7 @@ namespace Accord.Tests.Statistics
             Assert.AreEqual(new double[] { 1, 0, 0 }, outputData[11]);
         }
 
+#if !NO_WEB
         [Test]
         public void remapping_test_new_method()
         {
@@ -207,6 +208,7 @@ namespace Accord.Tests.Statistics
             Assert.AreEqual(new double[] { 0, 0, 1 }, outputData[2]);
             Assert.AreEqual(new double[] { 1, 0, 0 }, outputData[11]);
         }
+#endif
 #endif
 
         [Test]

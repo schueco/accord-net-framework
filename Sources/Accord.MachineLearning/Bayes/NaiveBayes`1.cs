@@ -53,9 +53,9 @@ namespace Accord.MachineLearning.Bayes
     ///   
     /// <para>
     ///   This class implements an arbitrary-distribution (real-valued) Naive-Bayes classifier. There is 
-    ///   also a special <see cref="NaiveBayes.Normal(int, int)">named constructor to create classifiers 
-    ///   assuming normal distributions for each variable</see>. For a discrete (integer-valued) distribution 
-    ///   classifier, please see <see cref="NaiveBayes"/>. </para>
+    ///   also a special NaiveBayes.Normal(int, int) named constructor to create classifiers 
+    ///   assuming normal distributions for each variable. For a discrete (integer-valued) distribution 
+    ///   classifier, please see NaiveBayes. </para>
     ///   
     /// <para>
     ///   References:
@@ -121,7 +121,6 @@ namespace Accord.MachineLearning.Bayes
     /// <code source="Unit Tests\Accord.Tests.MachineLearning\Bayes\NaiveBayes`1Test.cs" region="doc_learn" />
     /// </example>
     /// 
-    /// <seealso cref="NaiveBayes"/>
     /// <seealso cref="NaiveBayesLearning{TDistribution}"/>
     /// 
     [Serializable]
@@ -350,7 +349,7 @@ namespace Accord.MachineLearning.Bayes
             responses = Special.Softmax(ll);
             return imax;
         }
-#if !NETSTANDARD1_4
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Saves the Naïve Bayes model to a stream.
         /// </summary>

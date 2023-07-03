@@ -41,7 +41,7 @@ namespace Accord.MachineLearning.VectorMachines
     /// 
     [Serializable]
     [Obsolete("Please use SupportVectorMachine<TKernel>.")]
-#if !NETSTANDARD1_4
+#if !NET5_0_OR_GREATER
     [SerializationBinder(typeof(KernelSupportVectorMachine.KernelSupportVectorMachineBinder))]
 #endif
     public class KernelSupportVectorMachine :
@@ -77,7 +77,7 @@ namespace Accord.MachineLearning.VectorMachines
 
 
 #region Serialization backwards compatibility
-#if !NETSTANDARD1_4
+#if !NET5_0_OR_GREATER
         internal class KernelSupportVectorMachineBinder : SerializationBinder
         {
             public override Type BindToType(string assemblyName, string typeName)

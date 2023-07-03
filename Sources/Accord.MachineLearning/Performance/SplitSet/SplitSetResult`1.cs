@@ -34,7 +34,7 @@ namespace Accord.MachineLearning
         where TModel : class
     {
         /// <summary>
-        ///   Gets the <see cref="CrossValidation{T}"/>   
+        ///   Gets the CrossValidation{T}   
         ///   object used to generate this result.
         /// </summary>
         /// 

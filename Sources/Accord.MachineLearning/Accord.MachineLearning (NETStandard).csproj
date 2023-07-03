@@ -3,7 +3,9 @@
   <PropertyGroup>
     <AssemblyName>Accord.MachineLearning</AssemblyName>
     <RootNamespace>Accord.MachineLearning</RootNamespace>
-    <TargetFrameworks>netstandard2.0;netstandard1.4;net47</TargetFrameworks>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+    <NoWarn>NU1803</NoWarn>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)Accord.NET (NETStandard).targets" />
@@ -18,24 +20,5 @@
     <ProjectReference Include="..\Accord.Math\Accord.Math (NETStandard).csproj" />
     <ProjectReference Include="..\Accord.Statistics\Accord.Statistics (NETStandard).csproj" />
   </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.4'">
-    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
-  </ItemGroup>
-
-  <Choose>
-    <When Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard1.4'">
-      <ItemGroup>
-        <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
-      </ItemGroup>
-    </When>
-    <When Condition="'$(TargetFramework)' == 'net35'">
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.CSharp" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
 
 </Project>

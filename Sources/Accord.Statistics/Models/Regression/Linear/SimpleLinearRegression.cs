@@ -275,15 +275,16 @@ namespace Accord.Statistics.Models.Regression.Linear
         /// 
         public string ToString(string format, IFormatProvider formatProvider)
         {
+            const int digits = 13;
             string a = format != null ?
                 Slope.ToString(format, formatProvider) :
-                Slope.ToString(formatProvider);
+                Math.Round(Slope, digits).ToString(formatProvider);
 
             string b = format != null ?
                 Intercept.ToString(format, formatProvider) :
-                Intercept.ToString(formatProvider);
+                Math.Round(Intercept, digits).ToString(formatProvider);
 
-            return String.Format("y(x) = {0}x + {1}", a, b);
+            return String.Format($"y(x) = {a}x + {b}");
         }
 
         /// <summary>

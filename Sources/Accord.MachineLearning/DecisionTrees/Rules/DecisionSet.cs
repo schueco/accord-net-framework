@@ -229,7 +229,7 @@ namespace Accord.MachineLearning.DecisionTrees.Rules
         /// 
         public string ToString(Codification<string> codebook, string outputColumn, CultureInfo cultureInfo)
         {
-            return toString(codebook, outputColumn, CultureInfo.CurrentUICulture);
+            return toString(codebook, outputColumn, cultureInfo);
         }
 
         private string toString(Codification<string> codebook, string outputColumn, CultureInfo cultureInfo)

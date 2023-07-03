@@ -106,7 +106,7 @@ namespace Accord.Math.Optimization
         protected LineSearchFailedException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-#if !NETSTANDARD1_4
+#if !NET5_0_OR_GREATER
         /// <summary>
         ///   When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
         /// </summary>

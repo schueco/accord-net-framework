@@ -214,6 +214,8 @@ namespace Accord.Tests.MachineLearning
             Assert.IsTrue(c2);
         }
 
+#if !NO_WEB
+
         [Test, Category("Intensive")]
         [Ignore("Random")] // reproducible parallelization of this test requires #870
         public void learn_pendigits_normalization()
@@ -298,6 +300,8 @@ namespace Accord.Tests.MachineLearning
 #endif
             }
         }
+
+#endif
 
         [Test]
         [Category("MonoNotSupported")]

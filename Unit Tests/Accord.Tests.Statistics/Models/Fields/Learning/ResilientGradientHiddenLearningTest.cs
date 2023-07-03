@@ -264,7 +264,7 @@ namespace Accord.Tests.Statistics.Models.Fields
             Assert.AreEqual(2, y6);
         }
 
-
+#if !NO_WEB
 
         [Test, Category("Intensive")]
         [Ignore("Intensive")] // reproducible parallelization of this test requires #870
@@ -275,7 +275,7 @@ namespace Accord.Tests.Statistics.Models.Fields
 
             using (var travis = new KeepTravisAlive())
             {
-                #region doc_learn_pendigits
+#region doc_learn_pendigits
                 // Ensure we get reproducible results
                 Accord.Math.Random.Generator.Seed = 0;
 
@@ -361,7 +361,7 @@ namespace Accord.Tests.Statistics.Models.Fields
                 // Check the performance of the classifier by comparing with the ground-truth:
                 var m2 = new GeneralConfusionMatrix(predicted: testPredicted, expected: testOutputs);
                 double testAcc = m2.Accuracy; // should be 0.77061649319455561
-                #endregion
+#endregion
 
                 var loss = new Accord.Math.Optimization.Losses.ZeroOneLoss(testOutputs).Loss(testPredicted);
                 Assert.AreEqual(1.0 - loss, m2.Accuracy);
@@ -378,5 +378,6 @@ namespace Accord.Tests.Statistics.Models.Fields
 #endif
             }
         }
+#endif
     }
 }

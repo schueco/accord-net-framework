@@ -22,10 +22,6 @@
 
 namespace Accord.DataSets
 {
-    using Accord.DataSets.Base;
-    using Accord.Math;
-    using System;
-
     /// <summary>
     ///   Wine Recognition Data
     /// </summary>
@@ -46,8 +42,10 @@ namespace Accord.DataSets
     ///    </list></para>
     /// </remarks>
     /// 
+#if !NO_WEB
     /// <seealso cref="Accord.DataSets.Base.SparseDataSet" />
     /// 
+#endif
     public class Wine
     {
 

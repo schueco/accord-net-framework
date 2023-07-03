@@ -34,7 +34,6 @@ namespace Accord.MachineLearning.Bayes
     /// <typeparam name="TDistribution">The type for the distributions used to model each class.</typeparam>
     /// <typeparam name="TInput">The type for the samples modeled by the distributions.</typeparam>
     ///
-    /// <seealso cref="NaiveBayes"/>
     /// <seealso cref="NaiveBayes{TDistribution}"/>
     /// <seealso cref="NaiveBayes{TDistribution, TInput}"/>
     /// 
