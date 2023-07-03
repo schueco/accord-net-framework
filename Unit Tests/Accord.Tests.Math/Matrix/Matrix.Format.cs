@@ -30,7 +30,7 @@ namespace Accord.Tests.Math
     using System.IO;
 
     [TestFixture]
-    [Culture("")]
+    [SetCulture("")]
     public class MatrixFormatTest
     {
 
