@@ -1,3 +1,13 @@
+# Changes made by Schüco Digital GmbH
+
+* Upgraded the solution to .NET 6
+* Removed all unneeded projects and associated files
+* Added files for our internal build pipeline and nuget creation
+
+The Installing and Building Steps from the original README are obsolete for this repository.
+
+The original README reads as follows:
+
 # Accord.NET Framework
 
 This project is currently archived. Please fork the project into your own GitHub account if you would like to continue its development.
