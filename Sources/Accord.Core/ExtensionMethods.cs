@@ -626,47 +626,6 @@ namespace Accord
         }
 #endif
 
-#if !NETSTANDARD1_4
-        /// <summary>
-        ///   Retrieves the memory address of a generic value type.
-        /// </summary>
-        /// 
-        /// <typeparam name="T">The type of the object whose address needs to be retrieved.</typeparam>
-        /// <param name="t">The object those address needs to be retrieved.</param>
-        /// 
-#if NET45 || NET46 || NET462 || NETSTANDARD2_0
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
-        public static System.IntPtr AddressOf<T>(this T t)
-        {
-            unsafe
-            {
-                System.TypedReference reference = __makeref(t);
-                return *(System.IntPtr*)(&reference);
-            }
-        }
-
-        /// <summary>
-        ///   Retrieves the memory address of a generic reference type.
-        /// </summary>
-        /// 
-        /// <typeparam name="T">The type of the object whose address needs to be retrieved.</typeparam>
-        /// <param name="t">The object those address needs to be retrieved.</param>
-        /// 
-#if NET45 || NET46 || NET462 || NETSTANDARD2_0
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
-        static System.IntPtr AddressOfRef<T>(ref T t)
-        {
-            unsafe
-            {
-                System.TypedReference reference = __makeref(t);
-                System.TypedReference* pRef = &reference;
-                return (System.IntPtr)pRef; //(&pRef)
-            }
-        }
-#endif
-
 #if !NO_WEB
         // TODO: Move this method to a more appropriate location
         internal static WebClient NewWebClient()
