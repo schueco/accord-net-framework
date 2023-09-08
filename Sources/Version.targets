@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
     <Copyright>Copyright (c) Accord.NET authors, 2009-2020</Copyright>
-    <Version>6.0.0</Version>
-    <AssemblyVersion>6.0.0</AssemblyVersion>
-    <AssemblyInformationalVersion>6.0.0-alpha1</AssemblyInformationalVersion>
-    <FileVersion>6.0.0.0</FileVersion>
+    <Version>6.1.0</Version>
+    <AssemblyVersion>6.1.0</AssemblyVersion>
+    <AssemblyInformationalVersion>6.1.0</AssemblyInformationalVersion>
+    <FileVersion>6.1.0.0</FileVersion>
   </PropertyGroup>
 </Project>
