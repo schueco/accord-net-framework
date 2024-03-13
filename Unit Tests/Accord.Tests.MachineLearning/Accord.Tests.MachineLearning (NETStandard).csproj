@@ -3,7 +3,6 @@
   <PropertyGroup>
     <AssemblyName>Accord.Tests.MachineLearning</AssemblyName>
     <RootNamespace>Accord.Tests.MachineLearning</RootNamespace>
-    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)../Unit Tests/Accord.Tests (NETStandard).targets" />
