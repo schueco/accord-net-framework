@@ -90,7 +90,7 @@ namespace Accord.Math.Optimization
         public LineSearchFailedException(string message, Exception innerException)
             : base(message, innerException)
         { }
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Initializes a new instance of the <see cref="LineSearchFailedException"/> class.
         /// </summary>
@@ -105,6 +105,7 @@ namespace Accord.Math.Optimization
         /// 
         protected LineSearchFailedException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
+#endif
 
 #if !NET5_0_OR_GREATER
         /// <summary>

@@ -112,7 +112,7 @@ namespace Accord.IO
             : base(rawData, currentPosition, currentRecordIndex, currentFieldIndex, innerException)
         {
         }
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Initializes a new instance of the MissingFieldCsvException class with serialized data.
         /// </summary>
@@ -124,6 +124,6 @@ namespace Accord.IO
             : base(info, context)
         {
         }
-
+#endif
     }
 }

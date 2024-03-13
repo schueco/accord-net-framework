@@ -61,7 +61,7 @@ namespace Accord
         public NonSymmetricMatrixException(string message, Exception innerException) :
             base(message, innerException) { }
 
-
+    #if !NO_BINARY_SERIALIZATION
         /// <summary>
         /// Initializes a new instance of the <see cref="NonSymmetricMatrixException"/> class.
         /// </summary>
@@ -77,6 +77,7 @@ namespace Accord
         /// 
         protected NonSymmetricMatrixException(SerializationInfo info, StreamingContext context) :
             base(info, context) { }
+    #endif
 
     }
 }
