@@ -11,6 +11,10 @@
     <projectUrl>http://accord-framework.net</projectUrl>
     <iconUrl>http://accord-framework.net/logo.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <dependencies>
+      <group targetFramework="net6.0" />
+      <group targetFramework="net8.0" />
+    </dependencies>
     <description>
       Contains probability distributions, statistical models and methods such as Linear and Logistic regression, Hidden Markov Models, (Hidden) Conditional Random Fields, Principal Component Analysis, Partial Least Squares, Discriminant Analysis, Kernel methods and functions and many other related techniques. Provides methods for computing variances, standard deviations, averages, and many other statistical measures. This package is part of the Accord.NET Framework.
     </description>
@@ -22,8 +26,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.Statistics.dll" target="lib\net5.0" />
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.Statistics.xml" target="lib\net5.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.Statistics.dll" target="lib\net8.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.Statistics.xml" target="lib\net8.0" />
     
     <file src="..\..\Sources\bin\Release\net6.0\Accord.Statistics.dll" target="lib\net6.0" />
     <file src="..\..\Sources\bin\Release\net6.0\Accord.Statistics.xml" target="lib\net6.0" />

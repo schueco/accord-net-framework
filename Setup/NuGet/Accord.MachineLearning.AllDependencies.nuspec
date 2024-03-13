@@ -11,6 +11,10 @@
     <projectUrl>http://accord-framework.net</projectUrl>
     <iconUrl>http://accord-framework.net/logo.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <dependencies>
+      <group targetFramework="net6.0" />
+      <group targetFramework="net8.0" />
+    </dependencies>
     <description>
       Use this package in Schueco.Modules.MachineLearning!
 
@@ -20,32 +24,32 @@
     <tags>accord.net aforge.net aforge.net machine learning artificial intelligence svm kmeans kmodes gmm ransac kernel deep learning knn unity3d unity</tags>
   </metadata>
   <files>
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.MachineLearning.dll" target="lib\net5.0" />
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.MachineLearning.xml" target="lib\net5.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.MachineLearning.dll" target="lib\net8.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.MachineLearning.xml" target="lib\net8.0" />
 
     <file src="..\..\Sources\bin\Release\net6.0\Accord.MachineLearning.dll" target="lib\net6.0" />
     <file src="..\..\Sources\bin\Release\net6.0\Accord.MachineLearning.xml" target="lib\net6.0" />
 
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.Math.dll" target="lib\net5.0" />
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.Math.xml" target="lib\net5.0" />
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.Math.Core.dll" target="lib\net5.0" />
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.Math.Core.xml" target="lib\net5.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.Math.dll" target="lib\net8.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.Math.xml" target="lib\net8.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.Math.Core.dll" target="lib\net8.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.Math.Core.xml" target="lib\net8.0" />
 
     <file src="..\..\Sources\bin\Release\net6.0\Accord.Math.dll" target="lib\net6.0" />
     <file src="..\..\Sources\bin\Release\net6.0\Accord.Math.xml" target="lib\net6.0" />
     <file src="..\..\Sources\bin\Release\net6.0\Accord.Math.Core.dll" target="lib\net6.0" />
     <file src="..\..\Sources\bin\Release\net6.0\Accord.Math.Core.xml" target="lib\net6.0" />
 
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.dll" target="lib\net5.0" />
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.xml" target="lib\net5.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.dll" target="lib\net8.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.xml" target="lib\net8.0" />
     
     <file src="..\..\Sources\bin\Release\net6.0\Accord.dll" target="lib\net6.0" />
     <file src="..\..\Sources\bin\Release\net6.0\Accord.xml" target="lib\net6.0" />
 
     <file src="..\..\Sources\Accord.Core\Accord.dll.config" target="build\Accord.dll.config" />
 
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.Statistics.dll" target="lib\net5.0" />
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.Statistics.xml" target="lib\net5.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.Statistics.dll" target="lib\net8.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.Statistics.xml" target="lib\net8.0" />
     
     <file src="..\..\Sources\bin\Release\net6.0\Accord.Statistics.dll" target="lib\net6.0" />
     <file src="..\..\Sources\bin\Release\net6.0\Accord.Statistics.xml" target="lib\net6.0" />
