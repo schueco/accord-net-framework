@@ -63,18 +63,18 @@ pipeline
                 }
             }
         }     
-        stage('Build net6.0')
-        {
-            steps
-            {
-                dir("${env.WORKSPACE}\\Sources")
-                {
-                    bat """
-                    dotnet build --framework net6.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
-                    """
-                }
-            }
-        }
+        // stage('Build net6.0')
+        // {
+        //     steps
+        //     {
+        //         dir("${env.WORKSPACE}\\Sources")
+        //         {
+        //             bat """
+        //             dotnet build --no-restore --framework net6.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+        //             """
+        //         }
+        //     }
+        // }
         stage('Build net8.0')
         {
             steps
@@ -82,7 +82,7 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    dotnet build --framework net8.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    dotnet build --no-restore --framework net8.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
                     """
                 }
             }
