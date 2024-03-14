@@ -70,7 +70,7 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    dotnet build --no-restore --framework net6.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    dotnet build --framework net6.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
                     """
                 }
             }
@@ -82,7 +82,7 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    dotnet build --no-restore --framework net8.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    dotnet build --framework net8.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
                     """
                 }
             }
