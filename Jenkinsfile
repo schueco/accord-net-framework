@@ -7,7 +7,7 @@ pipeline
     }
     agent
     {
-        label 'CoreXBuilder'
+        label 'vs_2022'
     }
     options 
     {
