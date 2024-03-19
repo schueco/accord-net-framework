@@ -11,10 +11,6 @@
     <projectUrl>http://accord-framework.net</projectUrl>
     <iconUrl>http://accord-framework.net/logo.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <dependencies>
-      <group targetFramework="net6.0" />
-      <group targetFramework="net8.0" />
-    </dependencies>
     <description>
       Use this package in Schueco.Modules.MachineLearning!
 

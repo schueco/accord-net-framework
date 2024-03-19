@@ -17,8 +17,6 @@
     <summary>Conduct statistical analysis (i.e. PCA, KPCA, LDA, ANOVA), hypothesis tests, create Linear, Logistic and Generalized Linear regressions and models, Hidden Markov Models and others.</summary>
     <tags>accord.net aforge.net framework statistics kernel methods pca kpca least squares markov models conditional random fields hmm crf hcrf logistic linear regression unity3d unity</tags>
     <dependencies>
-      <group targetFramework="net6.0" />
-      <group targetFramework="net8.0" />
       <dependency id="Accord"      version="$version$" />
       <dependency id="Accord.Math" version="$version$" />
     </dependencies>
