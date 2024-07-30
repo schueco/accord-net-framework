@@ -123,7 +123,7 @@ namespace Accord.IO
                 CurrentRecordIndex, CurrentFieldIndex, CurrentPosition, RawData);
         }
 
-#if !NETSTANDARD1_4
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         /// Initializes a new instance of the MalformedCsvException class with serialized data.
         /// </summary>
@@ -181,7 +181,7 @@ namespace Accord.IO
         /// 
         public override string Message { get { return message; } }
 
-#if !NETSTANDARD1_4
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   When overridden in a derived class, sets the <see cref="T:SerializationInfo"/> with information about the exception.
         /// </summary>
@@ -189,9 +189,7 @@ namespace Accord.IO
         /// <param name="info">The <see cref="T:SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="T:StreamingContext"/> that contains contextual information about the source or destination.</param>
         /// 
-#if NET35
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
-#endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

@@ -23,8 +23,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.MachineLearning.dll" target="lib\net5.0" />
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.MachineLearning.xml" target="lib\net5.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.MachineLearning.dll" target="lib\net8.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.MachineLearning.xml" target="lib\net8.0" />
 
     <file src="..\..\Sources\bin\Release\net6.0\Accord.MachineLearning.dll" target="lib\net6.0" />
     <file src="..\..\Sources\bin\Release\net6.0\Accord.MachineLearning.xml" target="lib\net6.0" />

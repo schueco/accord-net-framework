@@ -3,7 +3,6 @@
   <PropertyGroup>
     <AssemblyName>Accord.DataSets</AssemblyName>
     <RootNamespace>Accord.DataSets</RootNamespace>
-    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <NoWarn>NU1803</NoWarn>
 	<OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath>
   </PropertyGroup>

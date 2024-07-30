@@ -72,7 +72,7 @@ namespace Accord
         public DimensionMismatchException(string message, Exception innerException) :
             base(message, innerException) { }
 
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         /// Initializes a new instance of the <see cref="DimensionMismatchException"/> class.
         /// </summary>
@@ -88,6 +88,7 @@ namespace Accord
         /// 
         protected DimensionMismatchException(SerializationInfo info, StreamingContext context) :
             base(info, context) { }
+#endif
 
     }
 }

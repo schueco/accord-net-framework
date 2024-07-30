@@ -99,10 +99,10 @@ namespace Accord.Tests.Math
         public void svdTest()
         {
             // Declare local matrices
-            mat u = _, s = _, v = _;
+            Mat u = _, s = _, v = _;
 
             // Compute a new mat
-            mat M = magic(3) * 5;
+            Mat M = magic(3) * 5;
 
             // Compute the SVD
             ret [u, s, v] = svd(M);
@@ -148,8 +148,8 @@ namespace Accord.Tests.Math
 
         public class MyAlgorithm : Accord.Math.Environments.OctaveEnvironment
         {
-            protected mat I, A, B;
-            protected mat U, S, V;
+            protected Mat I, A, B;
+            protected Mat U, S, V;
 
             public MyAlgorithm()
             {

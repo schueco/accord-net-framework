@@ -61,7 +61,7 @@ namespace Accord
         public SingularMatrixException(string message, Exception innerException) :
             base(message, innerException) { }
 
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         /// Initializes a new instance of the <see cref="SingularMatrixException"/> class.
         /// </summary>
@@ -77,6 +77,6 @@ namespace Accord
         /// 
         protected SingularMatrixException(SerializationInfo info, StreamingContext context) :
             base(info, context) { }
-
+#endif
     }
 }
