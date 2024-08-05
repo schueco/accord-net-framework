@@ -61,7 +61,7 @@ namespace Accord
         public NonPositiveDefiniteMatrixException(string message, Exception innerException) :
             base(message, innerException) { }
 
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         /// Initializes a new instance of the <see cref="NonPositiveDefiniteMatrixException"/> class.
         /// </summary>
@@ -77,6 +77,6 @@ namespace Accord
         /// 
         protected NonPositiveDefiniteMatrixException(SerializationInfo info, StreamingContext context) :
             base(info, context) { }
-
+#endif
     }
 }

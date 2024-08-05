@@ -62,7 +62,7 @@ namespace Accord
         public ConvergenceException(string message, Exception innerException) :
             base(message, innerException) { }
 
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Initializes a new instance of the <see cref="ConvergenceException"/> class.
         /// </summary>
@@ -78,6 +78,7 @@ namespace Accord
         /// 
         protected ConvergenceException(SerializationInfo info, StreamingContext context) :
             base(info, context) { }
+#endif
 
     }
 }

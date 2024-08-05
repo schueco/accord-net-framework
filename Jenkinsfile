@@ -7,11 +7,11 @@ pipeline
     }
     agent
     {
-        label 'CoreXBuilder'
+        label 'vs_2022'
     }
     options 
     {
-        timeout(time:15, unit:'MINUTES')
+        timeout(time:30, unit:'MINUTES')
     }
     environment
     {
@@ -63,18 +63,6 @@ pipeline
                 }
             }
         }     
-        stage('Build net5.0')
-        {
-            steps
-            {
-                dir("${env.WORKSPACE}\\Sources")
-                {
-                    bat """
-                    dotnet build --no-restore --framework net5.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
-                    """
-                }
-            }
-        }
         stage('Build net6.0')
         {
             steps
@@ -87,6 +75,18 @@ pipeline
                 }
             }
         }
+        stage('Build net8.0')
+        {
+            steps
+            {
+                dir("${env.WORKSPACE}\\Sources")
+                {
+                    bat """
+                    dotnet build --no-restore --framework net8.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                    """
+                }
+            }
+        }
         stage('Tests')
         {
             steps
@@ -94,7 +94,7 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    dotnet test --no-build --logger trx --results-directory test_results --configuration Release --framework net6.0 /p:Platform="Any CPU"
+                    dotnet test --no-build --logger trx --results-directory test_results --configuration ${env.CONFIGURATION} --framework net8.0 /p:Platform="${env.PLATFORM}"
                     """
                 }
             }

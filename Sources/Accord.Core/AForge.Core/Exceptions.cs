@@ -86,7 +86,7 @@ namespace Accord
         /// 
         public ConnectionLostException(string message, Exception innerException)
             : base(message, innerException) { }
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Initializes a new instance of the <see cref="ConnectionLostException"/> class.
         /// </summary>
@@ -96,6 +96,7 @@ namespace Accord
         /// 
         public ConnectionLostException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
+#endif
     }
 
     /// <summary>
@@ -134,7 +135,7 @@ namespace Accord
         /// 
         public NotConnectedException(string message, Exception innerException)
             : base(message, innerException) { }
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Initializes a new instance of the <see cref="NotConnectedException"/> class.
         /// </summary>
@@ -144,6 +145,7 @@ namespace Accord
         /// 
         public NotConnectedException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
+#endif
 
     }
 
@@ -183,7 +185,7 @@ namespace Accord
         /// 
         public DeviceBusyException(string message, Exception innerException)
             : base(message, innerException) { }
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Initializes a new instance of the <see cref="DeviceBusyException"/> class.
         /// </summary>
@@ -193,6 +195,7 @@ namespace Accord
         /// 
         public DeviceBusyException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
+#endif
     }
 
     /// <summary>
@@ -230,7 +233,7 @@ namespace Accord
         /// 
         public DeviceErrorException(string message, Exception innerException)
             : base(message, innerException) { }
-
+#if !NO_BINARY_SERIALIZATION
         /// <summary>
         ///   Initializes a new instance of the <see cref="DeviceErrorException"/> class.
         /// </summary>
@@ -240,5 +243,6 @@ namespace Accord
         /// 
         public DeviceErrorException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
+#endif
     }
 }

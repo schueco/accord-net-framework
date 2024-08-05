@@ -29,14 +29,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B26C9DA9-C351-4401-B4CA-D217FA090C9E}"
 	ProjectSection(SolutionItems) = preProject
 		Accord.NET (NETStandard).targets = Accord.NET (NETStandard).targets
-		Accord.NET.testrunconfig = Accord.NET.testrunconfig
-		..\build-all.cmd = ..\build-all.cmd
-		..\clean-all.cmd = ..\clean-all.cmd
 		..\Contributors.txt = ..\Contributors.txt
 		..\Copyright.txt = ..\Copyright.txt
 		..\Release notes.txt = ..\Release notes.txt
 		Version.targets = Version.targets
-		..\Version.txt = ..\Version.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accord.DataSets (NETStandard)", "Accord.DataSets\Accord.DataSets (NETStandard).csproj", "{18C3E611-3993-4B93-82AE-5A9D2F776C18}"

@@ -18,8 +18,8 @@
     <tags>accord.net aforge.net framework structures machine learning .net c# unity3d unity</tags>
   </metadata>
   <files>
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.dll" target="lib\net5.0" />
-    <file src="..\..\Sources\bin\Release\net5.0\Accord.xml" target="lib\net5.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.dll" target="lib\net8.0" />
+    <file src="..\..\Sources\bin\Release\net8.0\Accord.xml" target="lib\net8.0" />
     
     <file src="..\..\Sources\bin\Release\net6.0\Accord.dll" target="lib\net6.0" />
     <file src="..\..\Sources\bin\Release\net6.0\Accord.xml" target="lib\net6.0" />
