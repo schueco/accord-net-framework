@@ -31,5 +31,5 @@ with open("nuget_version.json", "rt") as fIn:
     if stream == "main" or stream == "master":
         version = "%(major)s.%(minor)s.%(patch)s" % nuget_version
     else:
-        version = "%(major)s.%(minor)s.%(patch)s.%(type)s.%(change)s" % nuget_version
+        version = "%(major)s.%(minor)s.%(patch)s.%(type)s-%(change)s" % nuget_version
     print(version, end="")
