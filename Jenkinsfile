@@ -5,9 +5,9 @@ pipeline
     {
         booleanParam defaultValue: true, name: 'cleanUp', description: 'Clean up the build directory after the build is completed.'
     }
-    agent
+    agent 
     {
-        label 'standard_image'
+        label 'standard_image || vs_2022 || MIF'
     }
     options 
     {
