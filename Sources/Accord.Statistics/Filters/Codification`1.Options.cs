@@ -536,8 +536,20 @@ namespace Accord.Statistics.Filters
                 {
                     T key = (T)value;
                     if (!Mapping.ContainsKey(key))
-                        Mapping.Add(key, Mapping.Count); // And register the String->Integer mapping
+                        Mapping.Add(key, FindNextAvailableValue(Mapping)); // And register the String->Integer mapping
                 }
+            }
+
+            private int FindNextAvailableValue(TwoWayDictionary<T, int> mapping)
+            {
+                // Start checking from 0 upwards for the next available value
+                int nextValue = 0;
+                while (mapping.Values.Contains(nextValue))
+                {
+                    nextValue++;
+                }
+
+                return nextValue;
             }
 
             /// <summary>
