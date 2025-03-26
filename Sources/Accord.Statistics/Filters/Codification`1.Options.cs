@@ -536,17 +536,17 @@ namespace Accord.Statistics.Filters
                 {
                     T key = (T)value;
                     if (!Mapping.ContainsKey(key))
-                        Mapping.Add(key, FindNextAvailableValue(Mapping)); // And register the String->Integer mapping
+                        Mapping.Add(key, FindNextAvailableValue()); // And register the String->Integer mapping
                 }
             }
 
-            private int FindNextAvailableValue(TwoWayDictionary<T, int> mapping)
+            private int FindNextAvailableValue()
             {
-                // Start checking from 0 upwards for the next available value
+                HashSet<int> numSet = new(Mapping.Values);
                 int nextValue = 0;
-                while (mapping.Values.Contains(nextValue))
+                while (numSet.Contains(nextValue))
                 {
-                    nextValue++;
+                    ++nextValue;
                 }
 
                 return nextValue;
