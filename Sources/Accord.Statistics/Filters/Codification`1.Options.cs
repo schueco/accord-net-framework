@@ -536,8 +536,20 @@ namespace Accord.Statistics.Filters
                 {
                     T key = (T)value;
                     if (!Mapping.ContainsKey(key))
-                        Mapping.Add(key, Mapping.Count); // And register the String->Integer mapping
+                        Mapping.Add(key, FindNextAvailableValue()); // And register the String->Integer mapping
                 }
+            }
+
+            private int FindNextAvailableValue()
+            {
+                HashSet<int> numSet = new(Mapping.Values);
+                int nextValue = 0;
+                while (numSet.Contains(nextValue))
+                {
+                    ++nextValue;
+                }
+
+                return nextValue;
             }
 
             /// <summary>
