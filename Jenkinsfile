@@ -2,17 +2,13 @@
 
 pipeline
 {
-    parameters
-    {
-        booleanParam defaultValue: true, name: 'cleanUp', description: 'Clean up the build directory after the build is completed.'
-    }
     agent
     {
         label vmAgent()
     }
     options
     {
-        timeout(time:30, unit:'MINUTES')
+        timeout(time:10, unit:'MINUTES')
     }
     environment
     {
@@ -114,7 +110,7 @@ pipeline
                         }
 
                         uploadNuget {
-                            FILE_OR_PATTERN: "*.nupkg"
+                            FILE_OR_PATTERN = "*.nupkg"
                             UPLOAD_PATH = "Accord.NET"
                             SIGN_NUGET = true
                         }
@@ -131,9 +127,6 @@ pipeline
         {
             script
             {
-                if (params.cleanUp) {
-                    cleanWs cleanWhenNotBuilt : false
-                }
                 emailext (
                     body: '${SCRIPT, template="groovy-html.template"}',
                     attachLog: true,
