@@ -3,12 +3,10 @@ from json import load
 
 parser = argparse.ArgumentParser()
 parser.add_argument("stream", type=str)
-parser.add_argument("changelist", type=str)
 
 args = parser.parse_args()
 
 stream = args.stream
-changelist = args.changelist
 
 with open("nuget_version.json", "rt") as fIn:
 
@@ -26,10 +24,9 @@ with open("nuget_version.json", "rt") as fIn:
             nuget_version["type"] = "beta"
         else:
             nuget_version["type"] = "alpha." + stream
-    nuget_version["change"] = changelist
 
     if stream == "main" or stream == "master":
         version = "%(major)s.%(minor)s.%(patch)s" % nuget_version
     else:
-        version = "%(major)s.%(minor)s.%(patch)s.%(change)s-%(type)s" % nuget_version
+        version = "%(major)s.%(minor)s.%(patch)s-%(type)s" % nuget_version
     print(version, end="")
