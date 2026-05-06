@@ -4,7 +4,7 @@ pipeline
 {
     agent
     {
-        label vmAgent()
+        label compileAgent()
     }
     options
     {
