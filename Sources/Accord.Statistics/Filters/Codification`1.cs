@@ -748,7 +748,7 @@ namespace Accord.Statistics.Filters
                             try { value = map[label]; }
                             catch
                             {
-                                value = map.Values.Count + 1;
+                                value = map.Values.Count;
                                 map[label] = value;
                             }
 
