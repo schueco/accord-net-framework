@@ -4,7 +4,7 @@ pipeline
 {
     agent
     {
-        label vmAgent()
+        label compileAgent()
     }
     options
     {
@@ -58,26 +58,14 @@ pipeline
             }
         }
 
-        stage('Build net6.0')
+        stage('Build')
         {
             steps
             {
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                        dotnet build --no-restore --framework net6.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
-                    """
-                }
-            }
-        }
-        stage('Build net8.0')
-        {
-            steps
-            {
-                dir("${env.WORKSPACE}\\Sources")
-                {
-                    bat """
-                       dotnet build --no-restore --framework net8.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                        dotnet build --no-restore --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
                     """
                 }
             }
@@ -89,7 +77,7 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                        dotnet test --no-build --logger trx --results-directory test_results --configuration ${env.CONFIGURATION} --framework net8.0 /p:Platform="${env.PLATFORM}"
+                        dotnet test --no-build --logger trx --results-directory test_results --configuration ${env.CONFIGURATION} /p:Platform="${env.PLATFORM}"
                     """
                 }
             }

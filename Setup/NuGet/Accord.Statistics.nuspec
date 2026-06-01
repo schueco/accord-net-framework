@@ -25,7 +25,7 @@
     <file src="..\..\Sources\bin\Release\net8.0\Accord.Statistics.dll" target="lib\net8.0" />
     <file src="..\..\Sources\bin\Release\net8.0\Accord.Statistics.xml" target="lib\net8.0" />
     
-    <file src="..\..\Sources\bin\Release\net6.0\Accord.Statistics.dll" target="lib\net6.0" />
-    <file src="..\..\Sources\bin\Release\net6.0\Accord.Statistics.xml" target="lib\net6.0" />
+    <file src="..\..\Sources\bin\Release\net10.0\Accord.Statistics.dll" target="lib\net10.0" />
+    <file src="..\..\Sources\bin\Release\net10.0\Accord.Statistics.xml" target="lib\net10.0" />
   </files>
 </package>

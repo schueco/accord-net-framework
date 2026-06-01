@@ -190,7 +190,7 @@ namespace Accord.MachineLearning.DecisionTrees
         }
 
         /// <summary>
-        ///   Creates a set of decision variables from a <see cref="OrderedDictionary{TKey, TValue}"/> codebook.
+        ///   Creates a set of decision variables from a <see cref="Collections.OrderedDictionary{TKey, TValue}"/> codebook.
         /// </summary>
         /// 
         /// <param name="columns">The ordered dictionary containing information about the variables.</param>
@@ -198,7 +198,7 @@ namespace Accord.MachineLearning.DecisionTrees
         /// <returns>An array of <see cref="DecisionVariable"/> objects 
         ///   initialized with the values from the codebook.</returns>
         /// 
-        public static DecisionVariable[] FromDictionary(OrderedDictionary<string, string[]> columns)
+        public static DecisionVariable[] FromDictionary(Collections.OrderedDictionary<string, string[]> columns)
         {
             if (columns.Count == 0)
                 throw new ArgumentException("List of columns is empty.");
