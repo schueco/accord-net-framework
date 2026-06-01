@@ -3,7 +3,7 @@
   <Import Project="$(SolutionDir)Version.targets" />
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Authors>César Roberto de Souza, Accord.NET Authors</Authors>
@@ -39,11 +39,11 @@
     <DefineConstants>NO_EXPRESSIONS;NO_BINARY_SERIALIZATION;NO_DATA_TABLE;NO_DEFAULT_ENCODING;NO_CULTURE;NO_TRACE;NO_PARALLEL;$(DefineConstants)</DefineConstants>
   </PropertyGroup> -->
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0'">
 	  <DefineConstants>NO_BINARY_SERIALIZATION;NO_WEB;NO_EXCEL;NO_CODE_PROVIDER;$(DefineConstants)</DefineConstants>	
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net10.0'">
 	<DefineConstants>NO_BINARY_SERIALIZATION;NO_WEB;NO_EXCEL;NO_CODE_PROVIDER;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 

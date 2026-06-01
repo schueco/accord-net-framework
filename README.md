@@ -1,6 +1,6 @@
 # Changes made by Schüco Digital GmbH
 
-* Upgraded the solution to .NET 8
+* Upgraded the solution to .NET 10
 * Removed all unneeded projects and associated files
 * Added files for our internal build pipeline and nuget creation
 

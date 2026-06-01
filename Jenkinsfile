@@ -1,53 +1,33 @@
-@Library("Jenkins-Library") _
+@Library('global-shared-library@main') _
+
 pipeline
 {
-    parameters
+    agent
     {
-        booleanParam defaultValue: true, name: 'cleanUp', description: 'Clean up the build directory after the build is completed.'
+        label compileAgent()
     }
-    agent 
+    options
     {
-        label 'standard_image || vs_2022 || MIF'
-    }
-    options 
-    {
-        timeout(time:30, unit:'MINUTES')
+        timeout(time:10, unit:'MINUTES')
     }
     environment
     {
         CONFIGURATION = 'Release'
         PLATFORM = 'Any CPU'
+        JFROG_CLI_BUILD_NAME = JOB_NAME.replaceAll( '.*?/(.*)', '$1' ).toLowerCase()
+        JFROG_CLI_BUILD_NUMBER = "${BUILD_NUMBER}"
     }
     stages
     {
-        stage('Prepare Build')
-        {
-            steps
-            {
-                dir("${env.WORKSPACE}")
-                {
-                    script
-                    {
-                        env.IS_TRIGGERED_BY_USER = !currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').isEmpty()
-
-                        env.MULTIBRANCH_PIPELINE_NAME = currentBuild.fullProjectName.split('/')[0]
-                        env.ARTIFACTORY_BUILD_NAME = "${env.MULTIBRANCH_PIPELINE_NAME}-${env.BRANCH_NAME}"
-                    }
-                }
-            }
-        }
         stage('Calculate NuGET version')
         {
             steps
             {
-                dir("${env.WORKSPACE}")
+                script
                 {
-                    script
-                    {
-                        env.NUGET_VERSION = bat(returnStdout:true,
-                                                    script: "@python.exe calculateNuGETVersion.py ${BRANCH_NAME} $P4_CHANGELIST"
-                                                )
-                    }
+                    env.NUGET_VERSION = bat(returnStdout:true,
+                                                script: "@python.exe calculateNuGETVersion.py ${BRANCH_NAME}"
+                                            )
                 }
             }
         }
@@ -58,31 +38,34 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    jf nuget restore \".\\Accord.NET (NETStandard).sln\"
-                    """
-                }
-            }
-        }     
-        stage('Build net6.0')
-        {
-            steps
-            {
-                dir("${env.WORKSPACE}\\Sources")
-                {
-                    bat """
-                    dotnet build --no-restore --framework net6.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                        jf nuget restore \".\\Accord.NET (NETStandard).sln\"
                     """
                 }
             }
         }
-        stage('Build net8.0')
+
+        stage('Security audit') {
+            steps {
+                securityAudit {
+                }
+            }
+        }
+
+        stage('Collect build info') {
+            steps {
+                collectBuildinfo {
+                }
+            }
+        }
+
+        stage('Build')
         {
             steps
             {
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    dotnet build --no-restore --framework net8.0 --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
+                        dotnet build --no-restore --configuration ${env.CONFIGURATION} -p:Platform="${env.PLATFORM}"
                     """
                 }
             }
@@ -94,7 +77,7 @@ pipeline
                 dir("${env.WORKSPACE}\\Sources")
                 {
                     bat """
-                    dotnet test --no-build --logger trx --results-directory test_results --configuration ${env.CONFIGURATION} --framework net8.0 /p:Platform="${env.PLATFORM}"
+                        dotnet test --no-build --logger trx --results-directory test_results --configuration ${env.CONFIGURATION} /p:Platform="${env.PLATFORM}"
                     """
                 }
             }
@@ -107,20 +90,24 @@ pipeline
                 {
                    script
                    {
-                        files = findFiles( glob: '*.nuspec' )
+                        def files = findFiles( glob: '*.nuspec' )
                         files.each
                         {
                             f ->
                                 bat script: "nuget pack ${f.path} -Version ${env.NUGET_VERSION}"
                         }
 
-                        jfrogCliUpload(JFROG: 'jf', FILE: '*.nupkg', TARGET: "nuget-local/Accord.NET/${NUGET_VERSION}/", ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER, FLAT: true)
-                        jfrogCliCollectEnvVar(JFROG: 'jf', ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER)
-                        jfrogCliPublishInfo(JFROG: 'jf', ARTIFACTORY_BUILD_NAME: env.ARTIFACTORY_BUILD_NAME, ARTIFACTORY_BUILD_NUMBER: env.BUILD_NUMBER)
+                        uploadNuget {
+                            FILE_OR_PATTERN = "*.nupkg"
+                            UPLOAD_PATH = "Accord.NET"
+                            SIGN_NUGET = true
+                        }
+                        publishBuildinfo {
+                        }
                     }
                 }
             }
-        }                
+        }
     }
     post
     {
@@ -128,9 +115,6 @@ pipeline
         {
             script
             {
-                if (params.cleanUp) {
-                    cleanWs cleanWhenNotBuilt : false
-                }
                 emailext (
                     body: '${SCRIPT, template="groovy-html.template"}',
                     attachLog: true,
