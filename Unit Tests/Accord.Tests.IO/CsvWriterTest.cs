@@ -41,7 +41,7 @@ namespace Accord.Tests.IO
 
             #region doc_matrix
             // Tell where to store the matrix (adjust to your own liking)
-            string filename = Path.Combine(Path.GetTempPath(), "matrix.csv");
+            string filename = Path.GetTempFileName();
 
             // Let's say we want to store a multidimensional array
             double[,] values =
@@ -74,7 +74,7 @@ namespace Accord.Tests.IO
 
             #region doc_jagged
             // Tell where to store the matrix (adjust to your own liking)
-            string filename = Path.Combine(Path.GetTempPath(), "jagged.csv");
+            string filename = Path.GetTempFileName();
 
             // Let's say we want to store a jagged array
             double[][] values =
@@ -119,7 +119,7 @@ namespace Accord.Tests.IO
 
             #region doc_table
             // Tell where to store the data table (adjust to your own liking)
-            string filename = Path.Combine(Path.GetTempPath(), "table.csv");
+            string filename = Path.GetTempFileName();
 
             // Let's say we have the following data table
             DataTable table = new DataTable("My table");
@@ -162,7 +162,7 @@ namespace Accord.Tests.IO
         {
             #region doc_objects
             // Tell where to store the matrix (adjust to your own liking)
-            string filename = Path.Combine(Path.GetTempPath(), "objects.csv");
+            string filename = Path.GetTempFileName();
 
             // Let's say we want to store a jagged array of mixed types
             object[][] values =
