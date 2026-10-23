@@ -46,7 +46,7 @@ namespace Accord.MachineLearning.Performance
     /// <example>
     ///   <para>
     ///     The framework offers different ways to use grid search: one version is strongly-typed using generics
-    ///     and the other might need some manual casting. The exapmle below shows how to perform grid-search in
+    ///     and the other might need some manual casting. The example below shows how to perform grid-search in
     ///     a non-stringly typed way:</para>
     ///   <code source="Unit Tests\Accord.Tests.MachineLearning\GridSearchTest.cs" region="doc_learn" />
     ///   

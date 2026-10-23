@@ -36,7 +36,7 @@ namespace Accord
         private T value;
 
         /// <summary>
-        ///   Gets the value being casted.
+        ///   Gets the value being cast.
         /// </summary>
         /// 
         public T Value { get { return value; } }
@@ -86,7 +86,7 @@ namespace Accord
         private T value;
 
         /// <summary>
-        ///   Gets the value being casted.
+        ///   Gets the value being cast.
         /// </summary>
         /// 
         public T Value { get { return value; } }
